@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+    <title>聚交家创商城</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+</body>
+<script type="text/javascript" src="js/public.js"></script>
+
+<script type="text/javascript">
+var Request = new Object();
+    Request = GetRequest();
+var uid = Request["uid"];
+localStorage.userId = uid;
+var uId = localStorage.getItem("userId");
+var return_url = sessionStorage.getItem("returnUrl");
+
+if( uId )
+{
+
+	window.location.href = "http://abc.dasuanshop.com/"+return_url+".html";
+}
+else
+{
+	alert('fffff');
+}
+
+</script>
+</html>

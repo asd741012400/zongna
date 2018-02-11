@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>我的订单</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/indent.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+
+<div class="tab_title">
+	<div>
+		<a href="javascript:;" class="active" data-status="0">全部</a>
+		<a href="javascript:;" data-status="1">待付款</a>
+		<a href="javascript:;" data-status="2">待发货</a>
+		<a href="javascript:;" data-status="3">待收货</a>
+		<a href="javascript:;" data-status="4">已完成</a>
+	</div>
+</div>
+
+
+
+<div class="indent">
+
+
+</div>
+<p class="bottom">到底了</p>
+
+<div class="tan">
+	<ul class="cancel">
+		<li><p>确认取消这<i>两</i>件商品吗？</p></li>
+		<li>
+			<span>取消</span>
+			<a>确定</a>
+		</li>
+	</ul>
+	<ul class="delete">
+		<li><p>确认删除这件商品吗？</p></li>
+		<li>
+			<span>取消</span>
+			<a>确定</a>
+		</li>
+	</ul>
+</div>
+<div class="loading">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+
+<footer>
+	<div onclick=" window.location.href = 'home.html'">
+		<span><img src="images/home_a.png" alt=""></span>
+		<p>首页</p>
+	</div>
+	<div onclick=" window.location.href = 'shopping_cart.html'">
+		<span><img src="images/shoppingCart_a.png" alt=""></span>
+		<p>购物车</p>
+	</div>
+
+	<div class="active" onclick=" window.location.href = 'indent.html'">
+		<span><img src="images/indent_b.png" alt=""></span>
+		<p>订单</p>
+	</div>
+
+</footer>
+<style>
+
+</style>
+
+
+<script src="js/public.js"></script>
+<script src="js/pay.js"></script>
+
+<script type="text/javascript">
+
+
+
+
+// var uId = localStorage.getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// let uId = 1;
+let ajaxUrl = grtAjaxUrl(),
+    page = 1,
+    pagesize = 4,
+    payStatus = sessionStorage.getItem("payStatus");
+
+
+orderlist( page , pagesize , payStatus , user_Id )
+scrollEv( page , pagesize , payStatus , user_Id , orderlist );
+
+$('.tab_title div a').eq(payStatus).addClass('active').siblings('a').removeClass('active');
+$('.tab_title div a').click(function(event) {
+	$(this).addClass('active').siblings('a').removeClass('active');
+
+	$('.indent').html("");
+	sessionStorage.payStatus = $(this).attr("data-status")
+	orderlist( page , pagesize , $(this).attr("data-status") , user_Id )
+	scrollEv( page , pagesize , payStatus , user_Id , orderlist );
+});
+
+function orderlist( page , pageSize , payStatus , user_Id )
+{
+	// console.log( pageSize )
+	yDataAjax( ajaxUrl+"Home/Order/orderlist" , "get" , {
+		user_id : user_Id,
+		pay_status : payStatus,
+		pagesize : pageSize,
+		p : page
+	} , function( data ){
+
+		if( data.status )
+		{
+			console.log( data )
+
+			if ( data.data ) 
+			{
+
+
+				$.each( data.data , function(index, val) {
+
+					switch( val.c_pay_status )
+					{
+						case "1":
+							
+							obligation(val , val.order)
+						
+							break;
+						case "2":
+
+							dueOut(val , val.order)
+
+							break;
+						case "3":
+
+							shipped(val , val.order)
+							break;	
+						case "4":
+
+							achieve(val , val.order)
+
+							break;	
+						default:
+							dealClose(val , val.order)
+					}
+
+				});
+			}
+
+			// console.log( data )
+			loadImg(  $('.details_img img') );
+            if( page >= data.totalpage )
+            {
+                $(window).unbind("scroll");
+                $('p.bottom').show()
+            }
+		}
+
+	})
+}
+
+
+
+function tan( payorderId , deleteLi , obj , orderlistIdStr ){
+
+	obj.find('li').find('span').click(function(event) {
+		obj.hide();
+		$('.tan').hide();
+	});
+
+
+	obj.find('li').find('a').click(function(event) {
+		obj.hide();
+		$('.tan').hide();
+
+		if( deleteLi.attr("payStatus") == 1 )
+		{
+			yDataAjax( ajaxUrl+"Home/Order/cancel" , "get" , {
+				user_id : user_Id,
+				payorder_id : payorderId,
+			} , function( data ){
+
+
+				alert( data.msg )
+				if( data.status == 1 ) 
+				{
+					window.location.href = window.location.href
+				}
+
+			})
+		}
+		else 
+		{
+
+
+			yDataAjax( ajaxUrl+"Home/Order/delorder" , "post" , {
+				user_id : user_Id,
+				payorder_id : payorderId,
+				orderlist_id : orderlistIdStr
+
+			} , function( data ){
+
+
+				alert( data.msg )
+				if( data.status == 1 ) 
+				{
+					window.location.href = window.location.href
+				}
+
+
+
+			})
+		}
+		
+
+	});
+
+}
+
+
+
+
+
+
+function scrollEv( page , pagesize , payStatus , user_Id ,htmlFn )
+{
+    $(window).unbind("scroll");
+    $('p.bottom').hide()
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight)
+        {
+            page++;
+            addAjaxHtml( page , pagesize , payStatus , user_Id ,htmlFn )
+        }
+    })
+}
+
+
+
+function addAjaxHtml(  page , pagesize , payStatus , user_Id ,htmlFn )
+{
+
+    $('.loading').show()
+
+    setTimeout(function(){
+        htmlFn( page , pagesize , payStatus , user_Id );
+
+    },1000)
+}
+
+function obligation( val , order)
+{
+	var orderlist = [];
+	
+	console.log( val )
+	$('.indent').append("<div class='obligation'></div>")
+
+	$.each( order , function(index2 , val2){
+
+		$.each( val2.orderlist , function(index3 , val3){
+
+			orderlist.push( val3 )
+		})
+	})
+
+	$(".obligation").eq($('.obligation').length-1).append(
+			`<div payorder_id="${val.payorder_id}" payStatus="${val.c_pay_status}" class="parents">
+				<ul>
+					
+				</ul>
+				<p class="dispatching">
+					<span>${val.c_pay_statu}</span>
+					<a>共<i>${val.goodscount}</i>件商品 合计<em>￥${val.c_total_money}</em>（免邮）</a>
+				</p>
+				<div class="payment">
+					<span>联系卖家</span>
+					<span class="cancelBtn">取消订单</span>
+					<span class="fu">付款</span>
+				</div>
+			</div>`)
+
+
+		$.each( orderlist , function(index, val) {
+			
+			$('.obligation').eq($('.obligation').length-1).find('div').find('ul').append(
+				`<li orderlist_id="${val.orderlist_id}">
+					<b class="details_img"><img src="${val.c_image}" alt=""></b>
+					<div>
+						<h2>${val.c_title}</h2>
+						<span>规格：${val.c_guige}</span>
+						<p>
+							<b>¥${val.c_price}</b>
+							<em>¥${val.c_vipprice}</em>
+							<strong><img src="images/VIP_price.png" alt=""></strong>
+							<i>x${val.c_num}</i>
+						</p>
+					</div>
+				</li>`)
+		});
+
+}
+
+function dueOut( val , order )
+{
+
+
+
+	$.each( order , function(index2 , val2){
+
+		$('.indent').append("<div class='due_out'></div>")
+		$(".due_out").eq($('.due_out').length-1).append(
+			`<div payorder_id="${val.payorder_id}" payStatus="${val.c_pay_status}" class="parents">
+				<ul>
+					
+				</ul>
+				<p class="dispatching">
+					<span>${val.c_pay_statu}</span>
+					<a>共<i>${val2.orderlist.length}</i>件商品 合计<em>￥${val2.c_total_money}</em>（免邮）</a>
+				</p>
+				<div class="payment">
+					<span>退款</span>
+				</div>	
+			</div>`)
+
+		$.each( val2.orderlist , function(index3 , val3){
+
+			$(".due_out").eq($('.due_out').length-1).find('div').find('ul').append(
+				`<li orderlist_id="${val3.orderlist_id}" order_id="${val2.c_id}">
+					<b class="details_img"><img src="${val3.c_image}" alt=""></b>
+					<div>
+						<h2>${val3.c_title}</h2>
+						<span>规格：${val3.c_guige}</span>
+						<p>
+							<b>¥${val3.c_price}</b>
+							<em>¥${val3.c_vipprice}</em>
+							<strong><img src="images/VIP_price.png" alt=""></strong>
+							<i>x${val3.c_num}</i>
+						</p>
+					</div>
+				</li>`)
+
+		})
+
+
+	})
+
+
+}
+
+function shipped( val , order)
+{
+	$.each( order , function(index2 , val2){
+
+		$('.indent').append("<div class='shipped'></div>")
+
+		$('.shipped').eq($('.shipped').length-1).append(
+			`<div payorder_id="${val.payorder_id}" payStatus="${val.c_pay_status}" class="parents">
+				<ul>
+					
+				</ul>
+				<p class="dispatching">
+					<span>${val.c_pay_statu}</span>
+					<a>共<i>${val2.orderlist.length}</i>件商品 合计<em>￥${val2.c_total_money}</em>（免邮）</a>
+				</p>
+				<div class="payment">
+					<span>退款</span>
+					<span class="affirm">确认收货</span>
+				</div>	
+			</div>`)
+
+
+		$.each( val2.orderlist, function(index3, val3) {
+
+			$(".shipped").eq($('.shipped').length-1).find('div').find('ul').append(
+				`<li orderlist_id="${val3.orderlist_id}" order_id="${val2.c_id}">
+					<b class="details_img"><img src="${val3.c_image}" alt=""></b>
+					<div>
+						<h2>${val3.c_title}</h2>
+						<span>规格：${val3.c_guige}</span>
+						<p>
+							<b>¥${val3.c_price}</b>
+							<em>¥${val3.c_vipprice}</em>
+							<i>x${val3.c_num}</i>
+						</p>
+					</div>
+				</li>`)
+
+		});
+
+	})
+	
+	
+
+
+}
+
+function achieve( val , order)
+{
+	var orderlist = [];	
+	$.each( order , function(index2 , val2){
+
+		$.each( val2.orderlist , function(index3 , val3){
+
+			orderlist.push( val3 )
+		})
+	})
+
+	if ( val.c_code )
+	{
+
+
+
+
+		$('.indent').append("<div class='achieve'></div>")
+			
+			$.each( orderlist, function(index4, val4) {
+				$(".achieve").eq($('.achieve').length-1).append(
+					`<div payorder_id="${val.payorder_id}" payStatus="${val.c_pay_status}" class="parents">
+						<ul>
+						<li c_goods_id="${val4.c_goods_id}" c_guige_id="${val4.c_guige_id}" orderlist_id="${val4.orderlist_id}">
+							<b class="details_img"><img src="${val4.c_image}" alt=""></b>
+							<div>
+								<h2>${val4.c_title}</h2>
+								<span>规格：${val4.c_guige}</span>
+								<p>
+									<b>¥${val4.c_price}</b>
+									<em>¥${val4.c_vipprice}</em>
+									<strong><img src="images/VIP_price.png" alt=""></strong>
+									<i>x${val4.c_num}</i>
+								</p>
+							</div>
+						</li>
+						</ul>
+						<p class="dispatching">
+							<span>${val.c_pay_statu}</span>
+							<a>共<i>1</i>件商品 合计<em>￥${val4.c_vipprice}</em>（免邮）</a>
+						</p>
+						<div class="payment">
+							<span class="deleteBtn">删除订单</span>
+							<span class="commentBtn">评论</span>
+						</div>
+					</div>`)
+
+			});
+
+	}
+	else
+	{
+			$('.indent').append("<div class='achieve'></div>")
+			
+			$.each( orderlist, function(index4, val4) {
+				$(".achieve").eq($('.achieve').length-1).append(
+					`<div payorder_id="${val.payorder_id}" payStatus="${val.c_pay_status}" class="parents">
+						<ul>
+						<li c_goods_id="${val4.c_goods_id}" c_guige_id="${val4.c_guige_id}" orderlist_id="${val4.orderlist_id}">
+							<b class="details_img"><img src="${val4.c_image}" alt=""></b>
+							<div>
+								<h2>${val4.c_title}</h2>
+								<span>规格：${val4.c_guige}</span>
+								<p>
+									<b>¥${val4.c_price}</b>
+									<em>¥${val4.c_vipprice}</em>
+									<strong><img src="images/VIP_price.png" alt=""></strong>
+									<i>x${val4.c_num}</i>
+								</p>
+							</div>
+						</li>
+						</ul>
+						<p class="dispatching">
+							<span>${val.c_pay_statu}</span>
+							<a>共<i>1</i>件商品 合计<em>￥${val4.c_price}</em>（免邮）</a>
+						</p>
+						<div class="payment">
+							<span class="deleteBtn">删除订单</span>
+							<span class="commentBtn">评论</span>
+						</div>
+					</div>`)
+
+			});
+	}
+
+
+}
+function dealClose( val , order)
+{
+
+	var orderlist = [];
+	
+	console.log( val )
+	$('.indent').append("<div class='obligation'></div>")
+
+	$.each( order , function(index2 , val2){
+
+		$.each( val2.orderlist , function(index3 , val3){
+
+			orderlist.push( val3 )
+		})
+	})
+
+	$('.indent').append("<div class='achieve'></div>")
+		$(".achieve").eq($('.achieve').length-1).append(
+			`<div payorder_id="${val.payorder_id}" payStatus="${val.c_pay_status}" class="parents">
+				<ul>
+					
+				</ul>
+				<p class="dispatching">
+					<span>${val.c_pay_statu}</span>
+					<a>共<i>${val.goodscount}</i>件商品 合计<em>￥${val.c_total_money}</em>（免邮）</a>
+				</p>
+				<div class="payment">
+					<span class="deleteBtn">删除订单</span>
+				</div>
+			</div>`)
+		$.each( orderlist, function(index, val) {
+
+			$(".achieve").eq($('.achieve').length-1).find('div').find('ul').append(
+				`<li c_goods_id="${val.c_goods_id}" orderlist_id="${val.orderlist_id}">
+					<b class="details_img"><img src="${val.c_image}" alt=""></b>
+					<div>
+						<h2>${val.c_title}</h2>
+						<span>规格：${val.c_guige}</span>
+						<p>
+							<b>¥${val.c_price}</b>
+							<em>¥${val.c_vipprice}</em>
+							<strong><img src="images/VIP_price.png" alt=""></strong>
+							<i>x${val.c_num}</i>
+						</p>
+					</div>
+				</li>`)
+
+		});
+}
+
+$('.indent').delegate('.cancelBtn', 'click', function(event) {
+	var deleteLi = $(this).parent('.payment').parent('div');
+	var payorderId = $(this).parent('.payment').parent('div').attr('payorder_id');
+	var num = $(this).parent('.payment').parent('div').find('ul').find('li').length;
+	
+	$('.tan .cancel li p i').html( num )
+	$('.tan').show();
+	$('.tan .cancel').show();
+
+	tan( payorderId ,deleteLi , $('.tan .cancel'))
+
+});
+
+$('.indent').delegate('.deleteBtn', 'click', function(event) {
+
+	var deleteLi = $(this).parent('.payment').parent('div');
+	var paystatus = $(this).parent('.payment').parent('div').attr('paystatus');
+	var payorderId = $(this).parent('.payment').parent('div').attr('payorder_id');
+	var orderlistIdStr;
+	if( paystatus == 4 )
+	{
+		orderlistIdStr = $(this).parents('.parents').find('ul').find('li').attr("orderlist_id")
+
+	}
+	else
+	{
+		orderlistIdStr = [];
+		$.each( $(this).parents('.parents').find('ul').find('li') , function(){
+
+			orderlistIdStr.push($(this).attr("orderlist_id"));
+
+		})
+
+
+
+	}
+	
+	var payorderId = $(this).parent('.payment').parent('div').attr('payorder_id');
+	$('.tan').show();
+	$('.tan .delete').show();
+	tan( payorderId  , deleteLi ,$('.tan .delete') , orderlistIdStr)
+	// console.log( orderlistIdStr )
+
+});
+$('.indent').delegate('.affirm', 'click', function(event) {
+
+	var orderId = $(this).parent('.payment').parent('div').find('ul').find('li').attr('order_id');
+	yDataAjax( ajaxUrl+"Home/Order/confirm" , "get" , {
+		user_id : user_Id,
+		order_id : orderId,
+	} , function( data ){
+
+
+		if( data.status )
+		{
+
+			window.location.href = window.location.href
+			sessionStorage.payStatus = 4;
+		}
+
+	})
+
+})
+
+$('.indent').delegate('.payment .fu', 'click', function(event) {
+
+	var payorderId = $(this).parents('.parents').attr("payorder_id");
+
+	getPay( payorderId , user_Id , window.location.href)
+});
+
+
+
+$('.indent').delegate('.parents ul li', 'click', function(event) {
+
+	var paystatus = $(this).parents('.parents').attr("payStatus");
+	var payorderId = $(this).parents('.parents').attr("payorder_id");
+
+
+	if( paystatus == 1 ) 
+	{
+		window.location.href = "obligation_details.html?payorder_id="+payorderId;
+	}
+	else if( paystatus == 2 )
+	{
+		var order_id = $(this).attr("order_id");
+		window.location.href = "due_out_deteils.html?payorder_id="+payorderId+"&order_id="+order_id;
+	}
+	else if( paystatus == 3 )
+	{
+		var order_id = $(this).attr("order_id");
+		window.location.href = "shipped_details.html?payorder_id="+payorderId+"&order_id="+order_id;;
+	}
+	else if( paystatus == 4 )
+	{
+		var goodsId = $(this).attr("c_goods_id");
+		var guigeId = $(this).attr("c_guige_id");
+		window.location.href = "achieve_details.html?payorder_id="+payorderId+"&goods_id="+goodsId+"&guige_id="+guigeId;
+	}
+	else if( paystatus > 4 )
+	{
+		window.location.href = "defeated_details.html?payorder_id="+payorderId;
+	}
+})
+
+$('.indent').delegate('.payment .commentBtn', 'click', function(event) {
+
+	var goodsId = $(this).parents('.parents').find("ul").find("li").attr("c_goods_id");
+	sessionStorage.url = "indent.html";
+	window.location.href = "comment.html?c_goods_id="+goodsId
+});
+
+</script>
+
+
+</body>
+</html>
+
+
+

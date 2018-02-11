@@ -1,0 +1,87 @@
+body{
+	background: #f2f2f2;
+}
+
+.address .address_list{
+	background: #fff;	
+	padding: 0 0.24rem;
+	margin-top: 0.2rem;
+}
+.address .address_list h1{
+	font-size: 0.3rem;
+	color: #333333;
+	line-height: 0.9rem;
+}
+.address .address_list h1 span{
+	font-size: 0.26rem;
+	margin-left: 0.3rem;
+}
+.address .address_list p{
+	color:#666666;
+	font-size: 0.26rem;
+	width: 6.2rem;
+	margin-left: 0;
+}
+.address .address_list div.compile{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	font-size: 0.26rem;
+	line-height: 0.8rem;
+	margin-top: 0.3rem;
+	border-top: 1px solid #e5e5e5;
+}
+.address .address_list div.compile span{
+	flex: 1;
+	padding-left: 0.6rem;
+}
+.address .address_list div.compile span.active{
+	background: url('../images/pitch_on.png') left/0.4rem 0.4rem no-repeat;
+}
+.address .address_list div.compile a{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.address .address_list div.compile a i{
+	flex: 1;
+	background: url('../images/icon_compile.png') left/0.25rem 0.26rem no-repeat;
+	padding-left: 0.35rem;
+}
+.address .address_list div.compile a b{
+	flex: 1;
+	background: url('../images/icon_delete.png') left/0.24rem 0.26rem no-repeat;
+	padding-left: 0.34rem;
+	margin-left: 0.4rem;
+}
+
+
+.add_address{
+	width: 6.4rem;
+	line-height: 0.8rem;
+	background: #ea5b24;
+	font-size: 0.29rem;
+	color: #fff;
+	border-radius: 3px;
+	margin-top: 0.7rem;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.add_address span{
+	width: 2.6rem;
+	flex: 4;
+	padding-left: 0.1rem
+}
+.add_address i{
+	font-size: 0.6rem;
+	text-align: right;
+	line-height: 0.72rem;
+	flex: 3;
+}

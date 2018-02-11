@@ -1,0 +1,192 @@
+body{
+	background: #f2f2f2;
+}
+
+.padding{
+	background: #fff;
+	padding: 0 0.24rem;
+}
+.tab{
+	
+	line-height: 0.78rem;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 0.29rem;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	text-align: center;
+}
+.tab div{
+	flex: 1;
+	position: relative;
+}
+.tab div a{
+	color: #333333;
+}
+
+.tab em{
+	display: block;
+	width: 1px;
+	height: 0.6rem;
+	background: #e5e5e5;
+	margin-top: 0.09rem;
+}
+.tab div.active a{
+	color: #f03e3e;
+}
+.tab div.active span{
+	display: block;
+	width: 0.84rem;
+	height: 3px;
+	background: #f03e3e;
+	position: absolute;
+	bottom: -1px;
+	left: 50%;
+	margin-left: -0.42rem;
+}
+
+
+
+
+.content .record  .commodity ul li{
+	margin: 0.2rem 0;
+	background: #fff;
+	padding: 0 0.24rem;
+}
+.content .record .commodity ul li .commodity_details{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.3rem 0.24rem 0.2rem;
+}
+.content .record  .commodity ul li h3{
+	font-size: 0.3rem;
+	line-height: 0.6rem;
+	border-bottom: 1px solid #e5e5e5;
+	color: #999999;
+}
+.content .record .commodity ul li h1{
+	font-size: 0.22rem;
+	color: #999999;
+	line-height: 0.68rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.content .record  .commodity ul li .commodity_details b{
+	width: 1.88rem;
+}
+.content .record  .commodity ul li .commodity_details div{
+	flex: 1;
+	padding-left: 0.3rem; 
+}
+.content .record  .commodity ul li .commodity_details div a{
+	display: block;
+	font-size: 0.26rem;
+	color: #333333;
+}
+.content .record  .commodity ul li .commodity_details div p{
+	padding-top: 0.3rem;
+	overflow: hidden;
+}
+.content .record  .commodity ul li .commodity_details div p span{
+	font-size: 0.26rem;
+	color: #666666;
+	float: left;
+}
+.content .record  .commodity ul li .commodity_details div p span i{
+	color:#f23e3e;
+	font-size: 0.3rem;
+}
+.content .record  .commodity ul li .commodity_details div p strong{
+	font-size: 0.26rem;
+	float: right;
+	text-align: center;
+	border-radius: 3px;
+}
+.content .record  .commodity ul li .commodity_details div p strong.f2{
+	color: #f23e3e;
+}
+.content .record .commodity ul li .commodity_details div p strong.ea{
+	color:#ea5b24;
+}
+
+.content .detail{
+	margin-top: 0.2rem;
+	display: none;
+	padding-bottom: 0.2rem;
+}
+.content .detail .integral_title{
+	width: 3.3rem;
+	font-size: 0.29rem;
+	text-align: center;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	line-height: 0.94rem;
+}
+.content .detail .integral_title p{
+	width: 0.7rem;
+	border-bottom: 1px solid #999999;
+	margin-bottom: 0.46rem;
+}
+.content .detail .integral_title div{
+	flex: 1;
+	background: url('../images/icon_integral.png') left/0.34rem no-repeat;
+	margin-left: 0.2rem;
+	padding-left: 0.3rem;
+}
+
+.content .detail .integral_detail{
+	padding-bottom: 0.2rem;
+}
+.content .detail .integral_detail h1{
+	font-size: 0.29rem;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex; 
+	display: flex;
+	border-top: 1px solid #e5e5e5;
+	text-align: center;
+	padding: 0.2rem 0;	
+}
+.content .detail .integral_detail h1 a{
+	width: 2.8rem;
+	display: block;
+}
+.content .detail .integral_detail h1 span{
+	flex: 1;
+}
+.content .detail .integral_detail h1 i{
+	flex: 1;
+}
+.content .detail .integral_detail ul{
+	font-size: 0.26rem;
+}
+
+.content .detail .integral_detail ul li{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	text-align: center;
+	color: #666666;
+	line-height: 0.6rem;
+}
+.content .detail .integral_detail ul li a{
+	width: 2.8rem;
+	display: block;
+}
+.content .detail .integral_detail ul li span{
+	flex: 1;
+}
+.content .detail .integral_detail ul li i{
+	flex: 1;
+}

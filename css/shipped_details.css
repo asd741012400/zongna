@@ -1,0 +1,234 @@
+body{
+	background: #f2f2f2;
+}
+
+.header{
+	height: 2rem;
+	background: url('../images/obligation_title.jpg') center/100% no-repeat;
+	overflow: hidden;
+	padding: 0 0.24rem;
+	margin-bottom: 0.2rem;
+}	
+.header p{
+	float: left;
+	font-size: 0.3rem;
+	line-height: 2rem;
+	background: url('../images/icon_shipped.png') left 0.1rem center/0.52rem 0.52rem no-repeat;
+	padding-left: 0.9rem;
+	color: #fff;
+}
+.header ul{
+	font-size: 0.24rem;
+	float: right;
+	color: #fff;
+	text-align: right;
+	line-height: 2rem;
+}
+
+.site{
+	background: #fff;
+	margin-bottom: 0.2rem;
+	padding: 0.4rem 0.24rem;
+}
+.site h3{
+	font-size: 0.28rem;
+	padding-left: 0.38rem;
+	color: #333333;
+	padding-bottom: 0.1rem;
+}
+.site p{
+	font-size: 0.26rem;
+	background: url('../images/icon_site_b.png') left top 0.1rem/0.2rem 0.24rem no-repeat,url('../images/icon_arrows.png') right top 0.1rem/0.1rem 0.2rem no-repeat;
+	color: #666666;
+	padding:0 0.38rem;
+}
+
+
+.indent{
+	margin-bottom: 0.2rem;
+}
+.indent > div{
+	
+	overflow: hidden;
+}
+.indent > div > div{
+	background: #fff;
+	padding: 0rem 0.24rem 0;
+	overflow: hidden;
+	margin-bottom: 0.2rem;
+}
+.indent > div > div ul li{
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 0.3rem;
+	padding-top: 0.3rem;
+}
+.indent > div > div ul li b.details_img{
+	float: left;
+	overflow: hidden;
+	width: 1.88rem;
+	padding-right: 0.14rem;
+}
+.indent > div > div ul li div{
+	float: left;
+	width: 5rem;
+}
+.indent > div > div ul li div h2{
+	font-size: 0.26rem;
+	margin: 0;
+	width: 4.2rem;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+.indent > div > div ul li div span{
+	font-size: 0.26rem;
+	display: block;
+	color: #999999;
+	width: 4.2rem;
+	margin: 0;
+}
+.indent > div > div ul li div p{
+	overflow: hidden;
+}
+.indent > div > div ul li div p b{
+	font-size: 0.32rem;
+	float: left;
+}
+.indent > div > div ul li div p em{
+	font-size: 0.24rem;
+	float: left;
+	padding-left: 0.2rem;
+	line-height: 0.42rem;
+}
+.indent > div > div ul li div p strong{
+	width: 0.7rem;
+	float: left;
+	margin-top: 0.08rem;
+}
+.indent > div > div ul li div p i{
+	float: right;
+	font-size: 0.26rem;
+	color: #666666;
+}
+
+.delivery{
+	background: #fff;
+	padding: 0  0.24rem;
+	font-size: 0.26rem;
+	color: #999999;
+	margin-bottom: 0.2rem;
+
+}
+.delivery ul{
+	padding: 0.3rem 0;
+}
+.delivery span{
+	color: #333333;
+}
+.delivery p{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	border-top: 1px solid #e5e5e5;
+}
+.delivery p:last-of-type{
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.vip_code{
+	background: #fff;
+	margin-bottom: 0.2rem;
+	overflow: hidden;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	padding: 0rem 0.24rem;
+}
+.vip_code p{
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+}
+.vip_code p a{
+	font-size: 0.26rem;
+	color: #333333;
+	float: left;
+	background: url('../images/VIP_code.png') left/1.18rem 0.4rem no-repeat;
+	padding-left: 1.4rem;
+}
+.vip_code p span{
+	color: #333333;
+	float: right;
+	width: 3.4rem;
+	font-size: 0.24rem;
+	text-align: right;
+}
+
+
+.payment_count{
+	background: #fff;
+	padding: 0 0.24rem;
+}
+.payment_count ul{
+	padding: 0.3rem 0;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.payment_count ul li{
+	flex: 1;
+}
+.payment_count ul li:nth-of-type(1){
+	font-size: 0.26rem;
+	text-align: left;
+	color: #999999;
+}
+.payment_count ul li:nth-of-type(2){
+	font-size: 0.28rem;
+	text-align: right;
+	color: #333333;
+}
+.payment_count ul li span{
+	display: block;
+	width: 100%;
+}
+.payment_count ul li i{
+	display: block;
+}
+.payment_count p{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 0.26rem;
+	text-align: right;
+}
+.payment_count p span{
+	font-size: 0.3rem;
+	color: #f03e3e;
+}
+
+
+.payment{
+	font-size: 0.26rem;
+	float: right;
+	padding: 0.14rem 0;
+}
+.payment span:last-of-type{
+	margin-right: 0.24rem;
+}
+.payment span{
+	float: left;
+	width: 1.5rem;
+	text-align: center;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	border-radius: 0.3rem;
+	border: 1px solid #c0c0c0;
+	margin-left: 0.2rem;
+}
+.payment span.affirm{
+	border: 1px solid #ea5b24;
+	color: #ea5b24;
+}

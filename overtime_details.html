@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/overtime_details.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+ 
+
+<div class="header">
+	<p>交易关闭</p>
+	<ul>
+		<li>超时关闭</li>
+	</ul>
+</div>
+
+<div class="site">
+	<h3>收货人：张三丰 <span>133***8251</span></h3>
+	<p>重庆市 渝北区 重庆市渝北区泰山大道东段28号（东湖南路社区）10-3</p>
+</div>
+
+<div class="indent">
+	<div class="due_out">
+		<div>
+			<ul>
+				<li>
+					<b class="details_img"><img src="images/product3.jpg" alt=""></b>
+					<div>
+						<h2>全友家私 浪漫卧室家居韩式田园风格床卧室成套家具双人床床垫组合家具 </h2>
+						<span>规格：1.8m床+床头柜*2+床垫</span>
+						<p>
+							<b>¥98.00</b>
+							<em>¥88.00</em>
+							<strong><img src="images/VIP_price.png" alt=""></strong>
+							<i>x1</i>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="delivery">
+	<ul>
+		<li>订单编号<span>：421014120124</span></li>
+		<li>下单时间<span>：2017-10-21 20:50:12</span></li>
+	</ul>
+	<p>配送方式<span>：快递免邮</span></p>
+	<p>快递名称<span>：中通快递</span></p>
+	<p>快递单号<span>：455120124571</span></p>
+</div>
+
+<div class="vip_code">
+	<p>
+		<a>会员码</a>
+		<span>TG201001240421</span>
+	</p>
+</div>
+
+
+<div class="payment_count">
+	<ul>
+		<li>
+			<span>商品总额</span>
+			<i>+运费</i>
+		</li>
+		<li>
+			<span>¥359.00</span>
+			<i>¥0.00</i>
+		</li>
+	</ul>
+	<p>实付款： <span>￥359.00</span></p>
+</div>
+
+
+<div class="payment">
+	<span>删除订单</span>
+</div>
+
+<style type="text/css">
+
+</style>
+
+
+
+
+<script type="text/javascript">
+
+
+
+
+$(document).ready(function () {
+var html = $('.indent ul li div h2').html();
+	html = html.substring(0,26);
+	$('.indent ul li div h2').html( html + "..." )
+	
+
+})
+</script>
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>个人资料</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/personal_data.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+<div class="padding">
+	<ul class="nam_data">
+		<li class="head_portrait">
+			<a>头像</a>
+			<span><img src="" alt=""></span>
+		</li>
+
+		<li class="name">
+			<a>昵称</a>
+			<span>甜蜜的笑笑 </span>
+		</li>
+	</ul>
+</div>
+
+<div class="padding">
+	<p class="phone">
+		<a>手机号</a>
+		<span>未设置</span>
+	</p>
+</div>
+<div class="import">
+	<div>
+		<p><input class="import_message" placeholder="请输入..." /></p>
+		<span>回复</span>
+	</div>
+</div>
+
+
+<style>
+
+</style>
+   
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript">
+var ajaxUrl = grtAjaxUrl();
+// var uId = localStorage.setItem("uId" , uid).getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// var uId = 1;
+yDataAjax( ajaxUrl+"/Home/User/ucenter" , "get" , {
+	user_id : user_Id
+} , function( data ){
+
+	if( data.status )
+	{
+		$(".head_portrait span img").attr("src" , data.data.c_image)
+		$(".name span").html(data.data.c_username)
+		$(".phone span").html(data.data.c_tel)
+	}
+
+})
+
+
+
+$(function(){
+$('.phone span').click(function(event) {
+    $('.import').show();
+    $('.import_message').trigger("click").focus()
+});
+$('.import div').click(function(event) {
+	event.stopPropagation();
+});
+$('.import').click(function () {
+	$('.import').hide();
+})
+$('.import div span').click(function(event) {
+    event.stopPropagation();
+    var tel = $('.import_message').val();
+    yDataAjax( ajaxUrl+"Home/User/addtel" , "post" , {
+        c_user_id : user_Id,
+        c_tel : tel,
+	},function( data ) {
+
+        alert( data.msg )
+        if( data.status )
+        {
+            $('.phone span').html( $('.import_message').val() )
+            $('.import_message').val("")
+            $('.import').hide();
+            window.location.href = window.location.href;
+		}
+		else
+		{
+			$('.import_message').val("")
+		}
+
+
+    })
+
+})
+})
+
+</script>
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,181 @@
+*{
+	margin: 0 auto;
+	padding : 0;
+	-webkit-tap-highlight-color:rgba(255,0,0,0);
+	font-family: "微软雅黑";
+}
+img{
+	float: left;
+	width: 100%;
+	border: 0;
+}
+a{
+	text-decoration: none;
+}
+ul,ol{
+	list-style: none;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.highlight{
+	-webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+
+@font-face {
+    font-family: 'FangJian';
+    src: url('../fonts/fangjian.eot');
+    src: url('../fonts/fangjian.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/fangjian.woff') format('woff'),
+         url('../fonts/fangjian.ttf') format('truetype'),
+         url('../fonts/fangjian.svg#webfont34M5alKg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+h1,h2,h3,h4,h5,h6,b,strong{
+    font-weight: 500;
+}
+i,em{
+    font-style: normal;
+}
+header{
+	overflow: hidden;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	background: #fff;
+	border-bottom: 1px solid #e5e5e5;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+}
+header span{
+	float: left;
+	width: 0.7rem;
+	height: 0.7rem;
+	overflow: hidden;
+	border-radius: 50%;
+	margin-top: 0.1rem;
+	margin-left: 0.24rem;
+}
+header em{
+	width: 1px;
+	height: 0.4rem;
+	background: #e5e5e5;
+	display: block;
+	float: left;
+	margin: 0.3rem 0.1rem 0;
+}
+header div{
+	float: left;
+	background: #f2f2f2;
+	border-radius: 5px;
+	width: 6rem;
+	height: 0.6rem;
+	margin-top: 0.15rem;
+}
+header div a{
+	display: block;
+	float: left;
+	height: 100%;
+	width: 0.3rem;
+	background: url('../images/icon_search.png') left/100% no-repeat;
+	margin-left: 0.3rem;
+	margin-right: 0.16rem;
+}
+header div input{
+	float: left;
+	line-height: 0.6rem;
+	border: 0;
+	outline: medium;
+	background: none;
+	width: 3rem;
+}
+
+
+footer{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #fff;
+	border-top:1px solid #e5e5e5; 
+	padding-top: 0.12rem;
+	padding-bottom: 0.08rem;
+	z-index: 10000;
+}
+footer div{
+	flex: 1;
+	font-size: 0.2rem;
+	text-align: center;
+}
+
+footer div:last-of-type span{
+	width: 0.32rem;
+}
+footer div span{
+	display: block;
+	width: 0.38rem;
+	overflow: hidden;
+	margin-bottom: 0.06rem;
+}
+footer div.active p{
+	color: #ea5b24;
+}
+p.bottom{
+	text-align: center;
+	font-size: 0.3rem;
+	color: #999;
+	padding-bottom: 0.2rem;
+}
+
+.loading{
+	padding: 0.3rem 0;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #fff;
+	z-index: 100000;
+}
+.loading div{
+	display: flex;
+	width: 1.8rem;
+}
+.loading div span{
+	width: 0.5rem;
+	height: 0.5rem;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	transform-origin: center center;
+	-webkit-transform-origin: center center;
+	-webkit-animation: toRotate 1s infinite linear;
+	animation: toRotate 1s infinite linear;
+	z-index: 99999999;
+}
+.loading div p{
+	color: #999;
+	font-size: 0.3rem;
+}
+
+@keyframes toRotate
+{
+	0%
+	{
+		transform: rotate(0deg);
+	}
+	100%
+	{
+		transform: rotate(-360deg);
+	}
+}

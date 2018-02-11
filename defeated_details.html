@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/defeated_details.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+ 
+
+<div class="header">
+	<p></p>
+	<ul>
+		<li></li>
+	</ul>
+</div>
+
+<div class="site">
+	<h3></h3>
+	<p></p>
+</div>
+
+<div class="indent">
+	<div class="due_out">
+		<div>
+			<ul>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="delivery">
+	<ul>
+		<li>订单编号<span class="c_sn">：421014120124</span></li>
+		<li>下单时间<span class="order_time">：2017-10-21 20:50:12</span></li>
+		<li>支付时间<span class="pay_time">：2017-10-21 20:50:12</span></li>
+		<li>发货时间<span class="fahuo_time">：2017-10-21 20:50:12</span></li>
+	</ul>
+<!-- 	<p>配送方式<span class="kuaidi">：快递免邮</span></p>
+	<p>快递名称<span class="kuaidi_name">：中通快递</span></p>
+	<p>快递单号<span class="kuaidi_no">：455120124571</span></p> -->
+</div>
+
+<div class="vip_code">
+	<p>
+		<a>会员码</a>
+		<span>TG201001240421</span>
+	</p>
+</div>
+
+
+<div class="payment_count">
+	<ul>
+		<li>
+			<span>商品总额</span>
+		</li>
+		<li class="money">
+			<span>¥359.00</span>
+		</li>
+	</ul>
+	<p>实付款： <span>￥359.00</span></p>
+</div>
+
+
+<div class="payment">
+	<span>删除订单</span>
+</div>
+
+<div class="tan">
+	<ul class="delete">
+		<li><p>确认删除这<i></i>件商品吗？</p></li>
+		<li>
+			<span>取消</span>
+			<a>确定</a>
+		</li>
+	</ul>
+</div>
+
+<style type="text/css">
+
+</style>
+
+
+<script src="js/public.js"></script>
+
+<script type="text/javascript">
+
+
+
+
+$(document).ready(function () {
+// var uId = localStorage.getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// let uId = 1;
+var ajaxUrl = grtAjaxUrl();
+var Request = GetRequest();
+var payorderId = Request["payorder_id"];
+var orderlistId = [];
+var orderList = [];
+var merchantList = [];
+var orderDetail = [];
+
+$(document).ready(function () {
+
+	yDataAjax( ajaxUrl+"Home/Order/orderDetail" , "get" , {
+		user_id : user_Id,
+		payorder_id : payorderId
+	} , function( data ){
+		console.log( data )
+		if( data.status )
+		{
+			$('.header p').html( data.data.c_pay_statu );
+			$('.total_money').html(`需付款：￥${data.data.c_total_money}`);
+			$(".site h3").html(`收货人：${data.data.c_shuohuoname} <span>${data.data.c_tel}</span>`);
+			$(".site p").html(`${data.data.c_provinces}${data.data.c_city}${data.data.c_zone}${data.data.c_street}`)
+			$(".c_sn").html(`：${data.data.c_sn}`)
+			$(".order_time").html(`：${data.data.c_order_time}`)
+			$(".pay_time").html(`：${data.data.c_pay_time}`)
+			$(".fahuo_time").html(`：${data.data.c_fahuo_time}`)
+
+			$('.delivery p span.kuaidi').html(`：${data.data.c_kuaidi}`)
+			$('.delivery p span.kuaidi_name').html(`：${data.data.c_kuaidi_name}`)
+			$('.delivery p span.kuaidi_no').html(`：${data.data.c_kuaidi_no}`)
+
+			$('.payment_count .money span').html(data.data.c_total_money)
+			$('.payment_count p span').html(data.data.c_pay_money)
+
+			if( data.data.c_code )
+			{
+
+				$('.vip_code span').html(data.data.c_code)
+				$('.vip_code').show()
+			}
+			else
+			{
+				$('.vip_code').hide()
+			}
+
+			if( data.data.rows )
+			{
+				$.each( data.data.rows , function(index, val) {
+					 /* iterate through array or object */
+				
+					merchantList.push( val )
+
+				
+				});
+
+				$.each( merchantList , function(index, val) {
+					 /* iterate through array or object */
+				
+					$.each( val.orderDetail , function(index2,val2){
+
+						orderDetail.push( val2 )
+					});
+					
+				});
+
+				$.each( orderDetail , function(index, val) {
+					 /* iterate through array or object */
+					console.log( val )
+					$('.due_out div ul').append(
+						`<li c_orderlist_id="${val.c_orderlist_id}">
+							<b class="details_img"><img src="${val.c_image}" alt=""></b>
+							<div>
+								<h2>${val.c_title}</h2>
+								<span>规格：${val.c_guige}</span>
+								<p>
+									<b>¥${val.c_price}</b>
+									<em>¥${val.c_vipprice}</em>
+									<strong><img src="images/VIP_price.png" alt=""></strong>
+									<i>x${val.c_num}</i>
+								</p>
+							</div>
+						</li>`)
+				});
+
+
+
+
+			}
+
+			console.log( data )
+
+		}
+	})
+	
+
+})
+	
+
+
+$('.payment span').click(function(event) {
+	var num = $('.due_out div ul li').length;
+	
+	$.each( $('.due_out div ul li') , function( index , val ){
+
+		orderlistId.push($(this).attr("c_orderlist_id"));
+
+	})
+	$('.tan .delete li p i').html( num )
+	$('.tan').show();
+	$('.tan .delete').show();
+
+	tan( orderlistId , $('.tan .delete') )
+});
+
+
+function tan( orderlistId , obj ){
+
+	
+	obj.find('li').find('span').click(function(event) {
+		obj.hide();
+		$('.tan').hide();
+	});
+
+
+	obj.find('li').find('a').click(function(event) {
+		obj.hide();
+		$('.tan').hide();
+
+		yDataAjax( ajaxUrl+"Home/Order/delorder" , "post" , {
+			user_id : user_Id,
+			orderlist_id : orderlistId,
+			payorder_id : payorderId,
+		} , function( data ){
+
+
+			alert( data.msg )
+			if( data.status )
+			{
+				sessionStorage.payStatus = 0;
+				window.location.href = "indent.html";
+			}
+
+
+
+		})
+
+
+	});
+
+}
+
+
+
+
+})
+</script>
+
+
+</body>
+</html>
+
+
+

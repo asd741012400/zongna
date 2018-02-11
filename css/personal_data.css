@@ -1,0 +1,112 @@
+body{
+	background: #f2f2f2;
+	font-size: 0.28rem;
+}
+.padding{
+	padding: 0 0.24rem;
+	background:#fff;
+	margin-top: 0.2rem;
+}
+
+
+.nam_data li{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	line-height: 1rem;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.06rem 0;
+}
+.nam_data li a{
+	flex: 1;
+	color: #333333;
+}
+.nam_data li:first-of-type{
+	line-height: 0.94rem
+}
+.nam_data li:first-of-type span{
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 5px solid #f2f2f2;
+}
+.nam_data li span{
+	text-align: right;
+	color: #999999;
+}
+
+
+.phone{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	line-height: 1rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.phone a{
+	flex: 1;
+	color: #333333;
+}
+.phone span{
+	text-align: right;
+	color: #999999;
+	width:4rem;
+}
+.phone span input{
+	float: right;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	outline: medium;
+	text-align: right;
+}
+
+.import{
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	display: none;
+	z-index: 10000;
+}
+.import div{
+	background: #f2f2f2;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	overflow: hidden;
+}
+.import div p{
+	margin: 10px 0.24rem 0;
+	padding: 0.2rem;
+	background: #fff;
+	border-radius: 3px;
+	border: 1px solid #e5e5e5;
+	height: 0.5rem;
+}
+.import div p input{
+	width: 100%;
+	height: 100%;
+	border: 0;
+	float: left;
+	outline: medium;
+	resize: none;
+}
+.import div span{
+	float: right;
+	font-size: 0.26rem;
+	color: #333333;
+	width: 1.14rem;
+	border: 1px solid #e5e5e5;
+	line-height: 0.5rem;
+	background: #fff;
+	text-align: center;
+	border-radius: 5px;
+	margin: 0.2rem 0.24rem;
+}

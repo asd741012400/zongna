@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>订单详情</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/due_out_deteils.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+
+<div class="header">
+	<p></p>
+</div>
+
+<div class="site">
+	<h3></h3>
+	<p></p>
+</div>
+
+<div class="indent">
+	<div class="due_out">
+		<div>
+			<ul>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="delivery">
+	<ul>
+		<li>订单编号<span class="c_sn"></span></li>
+		<li>下单时间<span class="order_time"></span></li>
+	</ul>
+	<!-- <p>配送方式<span class="kuaidi"></span></p> -->
+</div>
+
+
+<div class="vip_code">
+	<p>
+		<a>会员码</a>
+		<span></span>
+	</p>
+</div>
+
+
+<div class="payment_count">
+	<ul>
+		<li>
+			<span>商品总额</span>
+		</li>
+		<li class="money">
+			<span></span>
+		</li>
+	</ul>
+	<p>实付款： <span></span></p>
+</div>
+
+
+<style type="text/css">
+
+</style>
+
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript">
+
+
+
+
+$(document).ready(function () {
+
+// var uId = localStorage.getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// let uId = 1;
+var ajaxUrl = grtAjaxUrl();
+var Request = GetRequest();
+var payorderId = Request["payorder_id"];
+var orderId = Request["order_id"];
+var orderList = [];
+var merchantList = [];
+var orderDetail = [];
+
+$(document).ready(function () {
+
+	yDataAjax( ajaxUrl+"Home/Order/orderDetail" , "get" , {
+		user_id : user_Id,
+		payorder_id : payorderId,
+		order_id : orderId
+	} , function( data ){
+
+		if( data.status )
+		{
+			console.log( data )
+			$('.header p').html( data.data.c_pay_statu );
+			$('.total_money').html(`需付款：￥${data.data.c_total_money}`);
+			$(".site h3").html(`收货人：${data.data.c_shuohuoname} <span>${data.data.c_tel}</span>`);
+			$(".site p").html(`${data.data.c_provinces}${data.data.c_city}${data.data.c_zone}${data.data.c_street}`)
+			$(".c_sn").html(`：${data.data.c_sn}`)
+			$(".order_time").html(`：${data.data.c_order_time}`)
+
+
+			$('.delivery p span.kuaidi').html(`：${data.data.c_kuaidi}`)
+	
+
+			$('.payment_count .money span').html(data.data.c_total_money)
+			$('.payment_count p span').html(data.data.c_pay_money)
+
+			if( data.data.c_code )
+			{
+
+				$('.vip_code span').html(data.data.c_code)
+				$('.vip_code').show()
+			}
+			else
+			{
+				$('.vip_code').hide()
+			}
+
+			if( data.data.rows )
+			{
+				$.each( data.data.rows , function(index, val) {
+					 /* iterate through array or object */
+				
+					merchantList.push( val )
+
+				
+				});
+
+				$.each( merchantList , function(index, val) {
+					 /* iterate through array or object */
+				
+					$.each( val.orderDetail , function(index2,val2){
+
+						orderDetail.push( val2 )
+					});
+					
+				});
+
+				$.each( orderDetail , function(index, val) {
+					 /* iterate through array or object */
+					console.log( val )
+					$('.due_out div ul').append(
+						`<li c_goods_id="${val.c_goods_id}">
+							<b class="details_img"><img src="${val.c_image}" alt=""></b>
+							<div>
+								<h2>${val.c_title}</h2>
+								<span>规格：${val.c_guige}</span>
+								<p>
+									<b>¥${val.c_price}</b>
+									<em>¥${val.c_vipprice}</em>
+									<strong><img src="images/VIP_price.png" alt=""></strong>
+									<i>x${val.c_num}</i>
+								</p>
+							</div>
+						</li>`)
+				});
+
+
+
+
+			}
+
+			console.log( data )
+
+		}
+	})
+	
+
+})
+	
+	
+	$('.due_out div ul').delegate('li', 'click', function(event) {
+		
+		window.location.href = "commodity_details.html?goods_id="+$(this).attr("c_goods_id");
+
+	});
+
+})
+</script>
+
+
+</body>
+</html>
+
+
+

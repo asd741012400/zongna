@@ -1,0 +1,486 @@
+body{
+	background: #f2f2f2;
+}
+.swiper-pagination{
+	width: 0.72rem;
+	height: 0.72rem;
+	bottom: 0.2rem;
+	font-size: 0.2rem;
+	text-align: center;
+	line-height: 0.72rem;
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: 50%;
+	color: #fff;
+	letter-spacing: -1px;
+}
+.swiper-pagination .swiper-pagination-current{
+	font-size: 0.3rem;
+}
+.swiper-pagination .swiper-pagination-total{
+	margin-top: 0.1rem;
+}
+
+.title{
+	background: #fff;
+	padding: 0 0.24rem;
+}
+.title h1{
+	font-size: 0.3rem;
+	line-height: 0.5rem;
+	padding-top: 0.3rem;
+}
+.title p{
+	line-height: 0.8rem;
+	overflow: hidden;
+}
+.title p b{
+	font-size: 0.32rem;
+	float: left;
+}
+.title p em{
+	font-size: 0.24rem;
+	color: #f23e3e;
+	float: left;
+	padding-left: 0.2rem;
+}
+.title p strong{
+	width: 0.7rem;
+	float: left;
+	margin-top: 0.3rem;
+}
+.title a{
+	display: block;
+	font-size: 0.26rem;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 0.8rem;
+}
+.title a i{
+	margin-right: 0.5rem;
+	color: #666666;
+}
+.title a span{
+	margin-right: 0.2rem;
+	color: #333333;
+}
+
+
+.shop{
+	background: #fff;
+	padding: 0 0.24rem;
+	margin: 0.2rem 0;
+	font-size: 0.28rem;
+}
+.shop p{
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background: url('../images/icon_arrows.png') right/0.13rem 0.23rem no-repeat;
+}
+.shop p i{
+	margin-right: 0.5rem;
+	color: #666666;
+	float: left;
+}
+.shop p.site span{
+	margin-right: 0.2rem;
+	color: #333333;
+	background: url('../images/icon_site_b.png') left/0.19rem 0.24rem no-repeat;
+	padding-left: 0.3rem;
+	width: 5.2rem;
+	float: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	height: 0.8rem;
+}
+
+.specification_select{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1001;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}	
+.specification_select div.div{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: #fff;
+	font-size: 0.26rem;
+}
+.specification_select div.div article{
+	position: relative;
+	margin: 0 0.24rem;
+	padding-bottom:  0.2rem;
+	border-bottom: 1px solid #e5e5e5; 
+}
+.specification_select div.div article b{
+	display: block;
+	overflow: hidden;
+	border: 2px solid #e5e5e5;
+	border-radius: 5px;
+	width: 2.8rem;
+	float: left;
+	margin-top: -0.6rem;
+
+}
+.specification_select div.div article p{
+	float: left;
+	margin-top: -1rem;
+	margin-left: 3.2rem;
+}
+.specification_select div.div article p span{
+	display: block;
+	font-size: 0.32rem;
+	color: #333333;
+}
+.specification_select div.div article p em{
+	font-size: 0.24rem;
+	color: #f23e3e;
+}
+.specification_select div.div article p strong{
+	display: inline-block;
+	width: 0.7rem;
+}
+
+
+.specification_select div.div div.specification{
+	margin: 0 0.24rem;
+	border-bottom: 1px solid #e5e5e5; 
+}
+.specification_select div.div div.specification h3{
+	font-size: 0.24rem;
+	color: #666666;
+	padding: 0.3rem 0 0.2rem;
+}
+.specification_select div.div div.specification ul{
+	overflow: hidden;
+}
+.specification_select div.div div.specification ul li{
+	padding: 0.1rem 0.2rem;
+	float: left;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	margin-right: 0.2rem;
+	margin-bottom: 0.3rem;
+	font-size: 0.2rem;
+}
+
+.specification_select div.div div.specification ul li.active{
+	border: 1px solid #ea5b24;
+	color: #ea5b24;
+}
+
+
+.specification_select div.div div.count{
+	padding: 0.3rem 0.24rem 0.4rem;
+	overflow: hidden;
+}
+
+.specification_select div.div div.count b{
+	color: #666666;
+	float: left;	
+	height: 0.52rem;
+	line-height: 0.52rem;
+}
+.specification_select div.div div.count p{
+	float: right;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	height: 0.52rem;
+	line-height: 0.52rem;
+}
+.specification_select div.div div.count span{
+	float: left;
+	width: 0.54rem;
+	text-align: center;
+}
+.specification_select div.div div.count i{
+	float: left;
+	text-align: center;
+	border-right: 1px solid #e5e5e5;
+	border-left: 1px solid #e5e5e5;
+	width: 0.76rem;
+}
+
+
+.specification_select div.div a{
+	display: block;
+	text-align: center;
+	background: #ea5b24;
+	line-height: 0.98rem;
+	height: 0.98rem;
+	color: #fff;
+}
+.specification_select div.div span.close{
+	position: absolute;
+	z-index: 999;
+	width: 0.5rem;
+	height: 0.5rem;
+	right: 0.24rem;
+	top: 0.1rem;
+}
+.specification_select div.div span.close img{
+	display: block;
+	width: 0.2rem;
+	height: 0.2rem;
+	float: none;
+	margin-top: 0.15rem;
+}
+
+
+
+
+
+.site_select{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1001;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+
+}	
+.site_select div.div{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: #fff;
+	font-size: 0.26rem;
+}
+.site_select div.div h2{
+	text-align: center;
+	font-size: 0.26rem;
+	line-height: 0.9rem;
+	height: 0.9rem;
+	border-bottom: 1px solid #e5e5e5;
+	margin: 0 0.24rem;
+}
+.site_select div.div ul{
+	padding: 0 0.24rem;
+	height: 6.3rem;
+	overflow: scroll;
+}
+.site_select div.div ul li{
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.3rem 0 0.3rem 0.4rem;
+	background: url('../images/icon_site_a.png')left 0.4rem/0.2rem 0.24rem no-repeat;
+	color: #333333;
+}
+.site_select div.div ul li.active{
+	background: url('../images/icon_site_b.png')left 0.4rem/0.2rem 0.24rem no-repeat;
+	color: #ea5b24;
+}
+
+.site_select div.div a{
+	display: block;
+	text-align: center;
+	background: #ea5b24;
+	line-height: 0.98rem;
+	height: 0.98rem;
+	color: #fff;
+}
+.site_select div.div span.close{
+	position: absolute;
+	z-index: 999;
+	width: 0.5rem;
+	height: 0.5rem;
+	right: 0.24rem;
+	top: 0.1rem;
+}
+.site_select div.div span.close img{
+	display: block;
+	width: 0.2rem;
+	height: 0.2rem;
+	float: none;
+	margin-top: 0.15rem;
+}
+
+
+.tab{
+	background: #fff;
+	font-size: 0.28rem;
+}
+.tab div.tab_change{
+	overflow: hidden;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	border-bottom: 1px solid #e5e5e5; 
+}
+.tab div.tab_change p{
+	float: left;
+	line-height: 0.88rem;
+	position: relative;
+}
+.tab div.tab_change p span{
+	position: absolute;
+	width: 0.66rem;
+	height: 2px;
+	background: #ea5b24;
+	bottom: 0;
+	left: 50%;
+	margin-left: -0.33rem;
+	display: none;
+}
+.tab div.tab_change p.active span{
+	display: block;
+}
+
+.commodity_details{
+	overflow: hidden;
+}
+
+
+
+.user_comment{
+	padding-top: 0.08rem;
+}
+.user_comment ul h1{
+	text-align: center;
+	padding: 0.3rem 0;
+}
+
+.user_comment ul li{
+	overflow: hidden;
+	padding: 0.3rem 0.24rem 0;
+}
+.user_comment ul li span{
+	float: left;
+	width: 0.78rem;
+	height: 0.78rem;
+	border-radius: 50%;
+	overflow: hidden;
+}	
+.user_comment ul li div{
+	float: right;
+	width: 6rem;
+	padding-bottom: 0.12rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.user_comment ul li div p{
+	overflow: hidden;
+}
+.user_comment ul li div p a{
+	font-size: 0.26rem;
+	color: #333333;
+	float: left;
+}
+.user_comment ul li div p time{
+	font-size: 0.24rem;
+	color: #999999;
+	float: right;
+}
+.user_comment ul li div article{
+	font-size: 0.26rem;
+	color: #333333;
+	line-height: 0.4rem;
+	margin-top: 0.1rem;
+}
+.user_comment ul li div strong{
+	display: block;
+	overflow: hidden;
+	margin-top: 0.2rem;
+}
+.user_comment ul li div strong b{
+	width: 30%;
+	float: left;
+	padding-right: 0.18rem;
+	padding-bottom: 0.18rem;
+}
+/*.user_comment ul li div strong b:nth-of-type(3n){*/
+	/*padding-right: 0;*/
+/*}*/
+
+
+
+.purchase{
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	bottom: 0;
+	background: #fff;
+}
+.purchase ul{
+	overflow: hidden;
+}
+.purchase ul li{
+	float: left;
+	height: 1rem;
+	line-height: 1rem;
+	width: 2.6rem;
+}
+.purchase ul li span{
+	display: block;
+	overflow: hidden;
+}
+.purchase ul li:nth-of-type(1){
+	border-right: 1px solid #e5e5e5;
+	line-height: 0.5rem;
+	width: 1.13rem;
+}
+.purchase ul li:nth-of-type(2){
+	width: 1.14rem;
+	line-height: 0.5rem;
+}
+.purchase ul li:nth-of-type(1) span{
+	width: 0.4rem;
+	margin-top: 0.14rem;
+}
+.purchase ul li:nth-of-type(2) span{
+	margin-top: 0.13rem;
+	width: 0.42rem;
+}
+
+.purchase ul li p{
+	text-align: center;
+	font-size: 0.2rem;
+}
+.purchase ul li:nth-of-type(4) b{
+	text-align: center;
+	display: block;
+	color: #fff;
+	font-size: 0.3rem;
+	background: #f03e3e;
+}
+.purchase ul li:nth-of-type(3) a{
+	background: #ea5b24;
+	color: #fff;
+	display: block;
+	text-align: center;
+	font-size: 0.3rem;
+}
+
+.succeed{
+	position: fixed;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	width: 3.4rem;
+	border-radius: 10px;
+	height: 2.8rem;
+	color: #fff;
+	font-size: 0.29rem;
+	text-align: center;
+	left: 50%;
+	margin-left: -1.7rem;
+	top: 50%;
+	margin-top: -1.4rem;
+	display: none;
+	z-index: 10000;
+}
+
+.succeed span{
+	display: block;
+	width: 0.8rem;
+	height: 0.8rem;
+	margin-bottom: 0.4rem;
+	margin-top: 0.65rem;
+}
+p.bottom{
+	margin: 0.2rem 0 1rem
+}

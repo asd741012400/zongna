@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>聚交家创商城</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+	<link rel="stylesheet" href="css/european_style_details.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+</head>
+
+<body>
+	
+<style>
+
+</style>
+
+<header>
+	<span><img src="" alt=""></span>
+	<em></em>
+	<div><a></a><input type="text" name="" placeholder="搜索您想要的内容"></div>
+</header>
+<div class="banner">
+	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+	    </div>
+	</div>
+	<div class="preview">
+		<span>点击预览购物</span>
+		<a>立即查看</a>
+	</div>
+</div>
+<div class="main">
+	<h1 class="title">
+		<a></a>
+		<span></span>
+	</h1>   
+	<div class="content">
+
+	</div>
+</div>
+<style type="text/css">
+.main h1 a{
+	width: 5.9rem;
+	float: left;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.main .content img{
+	max-width: 100%;
+	width: auto;
+	float: none;
+}
+</style>
+
+<div class="advertising">
+	<img src="" alt="">
+</div>
+<div class="code">
+
+</div>
+
+<div class="comment">
+	<h2>全部评论<span></span></h2>
+	<ul>
+	</ul>
+	<p class='bottom' style="display: none">到底了</p>
+	<div>
+		<p><span>Hi，点击此处说两句...</span></p>
+		<a class="get_integral">领取积分</a>
+	</div>
+</div>
+
+
+<div class="question" style="display: none;">
+	<div class="question_content">
+		<b><img src="images/icon_close.png" alt=""></b>
+		<h2>阅读全文并回答问题得积分</h2>
+		<div class="quiz">
+			<p>提问：<span></span></p>
+			<label><input type="text" placeholder="请输入正确答案" /></label>
+			<button>提交</button>
+		</div>
+		<div class="correct" style="display: none;">
+			<p>恭喜您！回答正确</p>
+			<a></a>
+			<button>确定</button>
+		</div>
+		<div class="error" style="display: none;">
+			<p></p>
+			<a></a>
+			<button>确定</button>
+		</div>
+	</div>
+</div>
+<div class="loading">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+<div class="import">
+	<div>
+		<p><textarea class="import_message" placeholder="请输入..."></textarea></p>
+		<span>回复</span>
+	</div>
+</div>
+<script>        
+       
+</script>
+
+<script src="js/public.js"></script>
+<script type="text/javascript" src="js/personal_center.js"></script>
+
+<script type="text/javascript">
+
+
+function toHide(){
+	$('.question .question_content').animate({opacity : 0}, 500)
+	$('.question').hide();
+	$('.quiz').show();
+	$('.correct').hide();
+	$('.error').hide();
+}
+
+
+var ajaxUrl = grtAjaxUrl();
+var Request = new Object();
+Request = GetRequest();
+var artcate_id = Request["artcate_id"];
+var id = Request["id"];
+// var uId = localStorage.getItem("uId");
+// var uId = 1;
+var user_Id = localStorage.getItem("userId");
+
+//详情
+yDataAjax( ajaxUrl+"Home/Article/articleDetail" , "get" , {
+    article_id : id,
+} , function( data ){
+	console.log( data )
+	if( data.data )
+	{
+	    $('.preview a').attr("href" ,data.data.c_carturl )
+        $('.main .title a').html(`【${data.data.c_artcatename}】${data.data.c_title}` )
+        $('.main .title span').html(`${data.data.c_hit}次` )
+        $('.content').append( data.data.c_detail )
+        if( data.data.c_adimage )
+        {
+
+			$('.advertising img').attr("src" , data.data.c_adimage)
+        }
+        else
+        {
+        	$('.advertising').hide(); 
+        }
+		$('.quiz p span').html( data.data.c_question )
+    }
+})
+
+
+//banner轮播
+yDataAjax( ajaxUrl+"Home/Article/cateBanner" , "get" , {
+    artcate_id : artcate_id
+},function( data ) {
+
+    if( data.status )
+    {
+			$('.swiper-container').append(`<div class="swiper-pagination"></div>`)
+        $.each( data.data , function(index , val) {
+
+            $('.swiper-wrapper').append(`<div class="swiper-slide"><img src="${val.c_image}" alt=""></div>`)
+            var mySwiper = new Swiper ('.swiper-container', {
+                autoHeight: true,
+                direction: 'horizontal',
+                pagination : '.swiper-pagination',
+                paginationType : 'bullets',
+                loop: true,
+                autoplay : 3000,
+            })
+        })
+    }
+
+})
+
+
+
+//提问
+$('.get_integral').bind('click', function(event) {
+    $('.question').show()
+    $('.question .question_content').animate({opacity : 1}, 500)
+    $('.quiz input').val("")
+});
+
+$('.question .question_content b').bind('click', function(event) {
+    toHide()
+});
+
+
+$('.correct button').click(function(event) {
+    toHide()
+});
+
+$('.error button').click(function(event) {
+    toHide()
+});
+
+$('.quiz button').click(function () {
+    var text = $(this).siblings('label').find('input').val();
+    console.log( text )
+	yDataAjax( ajaxUrl+"Home/Article/answerPost" , "post" , {
+		c_article_id : id,
+		c_answer : text,
+		c_user_id : user_Id
+	},function( data ) {
+
+        $('.quiz').hide();
+        if( data.status )
+        {
+            $('.correct a').html(`积分+${data.integral}`)
+            $('.correct').show();
+        }
+        else
+        {
+            var aText = data.msg.split("，");
+            $('.error p').html( aText[0] );
+            $('.error a').html( aText[1] );
+            $('.error').show();
+        }
+
+	})
+})
+
+
+// 评论添加
+$('.comment div p span').click(function(event) {
+    $('.import').show();
+    $('.import_message').trigger("click").focus()
+});
+$('.import div').click(function(event) {
+	event.stopPropagation();
+});
+$('.import').click(function () {
+	$('.import').hide();
+})
+$('.import div span').click(function(event) {
+    event.stopPropagation();
+    yDataAjax( ajaxUrl+"Home/Article/plPost" , "post" , {
+        c_user_id : user_Id,
+        c_article_id : id,
+        c_content : $('.import_message').val()
+	},function( data ) {
+
+        alert( data.msg )
+        if( data.status )
+        {
+            $('.import_message').val("")
+            $('.import').hide();
+            window.location.href = window.location.href;
+		}
+    })
+
+})
+
+//评论展示
+var page = 1,
+	pageSize = 4;
+
+addAjaxHtml(  page , pageSize , id , plList )
+scrollEv(  page , pageSize , id , plList )
+function scrollEv(  page , pageSize , id , htmlFn )
+{
+    $(window).unbind("scroll");
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight)
+        {
+            page++;
+            addAjaxHtml(  page , pageSize , id , plList )
+        }
+    })
+}
+
+
+
+function addAjaxHtml(  page , pageSize , id , htmlFn )
+{
+    Request = GetRequest();
+    var ajaxUrl = grtAjaxUrl();
+    $('.loading').show()
+
+    setTimeout(function(){
+        htmlFn( ajaxUrl , page , pageSize  , id );
+
+    },1000)
+}
+function plList( ajaxUrl , page , pageSize  , id ) {
+
+	yDataAjax( ajaxUrl+"Home/Article/plList" , "get" , {
+		article_id : id,
+		pagesize : pageSize,
+		p : page
+	},function( data ) {
+
+	    if( data.status == 1 )
+	    {
+	    	$('.comment h2 span').html( data.count )
+	    	console.log( data )
+	    	if( data.data )
+	    	{
+
+				$.each( data.data , function(index,val) {
+
+				    $('.comment ul').append(
+				        `<li>
+							<span><img src="${val.c_image}" alt=""></span>
+							<dl>
+								<dt>${val.c_username}</dt>
+								<dd>${val.c_content}</dd>
+							</dl>
+						</li>`)
+	            })
+	            loadImg(  $('.comment ul li') );
+	    	}
+		}
+		else
+		{
+			$('.loading').hide()
+		}
+
+        if( page >= data.totalpage )
+        {
+            $(window).unbind("scroll");
+            $('p.bottom').show()
+        }
+	})
+}
+
+//二维码广告
+
+nDataAjax( ajaxUrl+"Home/Other/adimage" , "get" , function( data ) {
+
+    if( data.status )
+    {
+		$('.code').append(`<img src="${data.data.c_adimage}" alt="">`)
+	}
+    console.log( data )
+})
+</script>
+
+
+</body>
+</html>
+
+
+

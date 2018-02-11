@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>聚交家创商城</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/european_style.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+
+</head>
+
+<body>
+	
+<style>
+
+</style>
+<div class="header">
+	<header>
+		<span><img src="" alt=""></span>
+		<em></em>
+		<div><a></a><input type="text" name="" placeholder="搜索您想要的内容"></div>
+	</header>
+	<div class="nav">
+		<ul>
+		</ul>
+	</div>
+</div>
+<div class="main">
+	<div class='default'>
+		<ul></ul>
+	</div>
+	<div class='goods_list'>
+		<ul></ul>
+	</div>
+    <h6 class='msg' style="display: none;"></h6>
+</div>
+<div class="loading" style="display: none;">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript" src="js/personal_center.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+
+let page = 1;
+var ajaxUrl = grtAjaxUrl();
+var Request = new Object();
+Request = GetRequest();
+var id = Request["artcate_id"];
+var goodscateId = Request["goodscate_id"];
+let pagesize = 4;
+
+
+if( goodscateId )
+{
+    addAjaxHtml( page , pagesize  , goodscateId , goodsList  )
+    scrollEv( page , pagesize , goodscateId , goodsList )
+}
+else
+{
+    addAjaxHtml( page , pagesize ,id , artcateDetail )
+    scrollEv( page , pagesize , id ,artcateDetail ) 
+}
+
+
+	//标题
+	nDataAjax( ajaxUrl+"Home/Goods/goodscate" , "get" , function( data ){
+
+	    if( data.status )
+	    {
+            var liWidth = 0;
+			console.log( data.data );
+			
+            $.each( data.data , function(index,val) {
+				$('.nav ul').append(
+				    `<li goodscate_id="${val.goodscate_id}">
+						<a style="background-image: url('${val.c_image}')">${val.c_name}</a>
+					</li>`)
+
+            })
+
+            $.each( $('.header .nav ul li') , function(index, val) {
+
+                liWidth += $(this).outerWidth();
+
+            });
+            $('.header .nav ul').width( liWidth + 10 )
+
+
+
+            $('.header .nav ul li').click(function () {
+				page = 1;
+            	pagesize = 6;
+				var goodscate_id = $(this).attr("goodscate_id");
+                $(this).addClass("active").siblings('li').removeClass("active");
+                $('.main .goods_list ul').html("");
+                $('.main .goods_list').show().siblings("div").hide();
+                $('.main .msg').hide()
+
+                $('p.bottom').remove();
+                addAjaxHtml( page , pagesize  , goodscate_id , goodsList  )
+                scrollEv( page , pagesize , goodscate_id , goodsList )
+
+            })
+
+        }
+	})
+
+
+})
+
+
+
+
+
+function scrollEv( page , pagesize , id ,htmlFn )
+{
+    $(window).unbind("scroll");
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight)
+        {
+            page++;
+            addAjaxHtml( page , pagesize , id  , htmlFn )
+        }
+    })
+}
+
+
+
+function addAjaxHtml(  page , pagesize , id , htmlFn )
+{
+    Request = GetRequest();
+    var ajaxUrl = grtAjaxUrl();
+    $('.loading').show()
+    $('.bottom').remove()
+    setTimeout(function(){
+        htmlFn( ajaxUrl , page , pagesize  , id );
+
+    },1000)
+}
+
+
+function artcateDetail( ajaxUrl , page , pagesize , id ) {
+    yDataAjax( ajaxUrl+"Home/Article/artcateDetail" , "get" , {
+        artcate_id : id,
+        pagesize : pagesize,
+        p : page
+    } , function( data ){
+
+        
+        if( data.status ) {
+            if( data.data )
+            {
+				console.log( data )
+				$.each( data.data ,function (index,val) {
+
+					$('.main div.default ul').append(
+						`<li artcle_id="${val.artcle_id}">
+								<span><img src="${val.c_image}" alt=""></span>
+								<p><a>【${val.c_artcatename}】</a>${val.c_title}</p>
+							</li>`)
+
+				})
+            }
+
+            loadImg(  $('.main div.default ul li img') );
+
+            $('.main div.default ul li').click(function () {
+				window.location.href = "european_style_details.html?artcate_id="+id+"&id="+$(this).attr("artcle_id")
+            })
+
+
+
+            if( page >= data.totalpage )
+            {
+                $(window).unbind("scroll");
+                $('body').append("<p class='bottom'>到底了</p>")
+            }
+
+        }
+
+    } )
+}
+
+function goodsList( ajaxUrl , page , pagesize , id ) {
+    yDataAjax( ajaxUrl+"Home/Goods/goodsList" , "get" , {
+        goodscate_id : id,
+        pagesize : pagesize,
+        p : page
+    } , function( data ){
+console.log( data )
+        if( data.status == 1 ) {
+            if( data.data )
+            {
+
+				$.each( data.data , function(index,val) {
+					$('.goods_list ul').append(
+						`<li goods_id="${val.goods_id}">
+							<span><img src="${val.c_image}" alt=""></span>
+							<a>${val.c_title}</a>
+							<p>
+								<b>¥${val.c_price}</b>
+								<em>¥${val.c_vipprice}</em>
+								<strong><img src="images/VIP_price.png" alt=""></strong>
+							</p>
+						</li>`)
+				})
+
+				$('.goods_list ul li').click(function() {
+
+				    window.location.href = "commodity_details.html?goods_id="+$(this).attr("goods_id");
+
+                })
+
+            }
+
+            loadImg( $('.goods_list ul li span img') )
+            if( page >= data.totalpage )
+            {
+                $(window).unbind("scroll");
+                $('.main').append("<p class='bottom'>到底了</p>")
+            }
+        }
+        else if( data.status == 2 )
+        {
+            $('.main .goods_list ul').html("<h6>暂无商品</h6>")
+            $('.main .goods_list').show()
+            $('.loading').hide()
+        }
+
+    } )
+}
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+

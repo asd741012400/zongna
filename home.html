@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>聚交家创商城</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/home.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+	
+<style>
+
+</style>
+
+<header>
+	<span><img src="" alt=""></span>
+	<em></em>
+	<div><a></a><input type="text" name="" placeholder="搜索您想要的内容"></div>
+</header>
+
+<div class="main">
+
+</div>
+<div class="loading">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+<footer>
+	<div class="active" onclick=" window.location.href = 'home.html'">
+		<span><img src="images/home_b.png" alt=""></span>
+		<p>首页</p>
+	</div>
+	<div onclick=" window.location.href = 'shopping_cart.html'">
+		<span><img src="images/shoppingCart_a.png" alt=""></span>
+		<p>购物车</p>
+	</div>
+
+	<div onclick=" window.location.href = 'indent.html'">
+		<span><img src="images/indent_a.png" alt=""></span>
+		<p>订单</p>
+	</div>
+
+</footer>
+
+
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="js/personal_center.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+	let page = 1;
+	addAjaxHtml( page )
+
+	// scrollEv( page )
+})
+
+
+function scrollEv( page )
+{
+	$(window).unbind("scroll");
+    $('body p.bottom').remove();
+	$(window).scroll(function(){
+		var scrollTop = $(this).scrollTop();
+	　　var scrollHeight = $(document).height();
+	　　var windowHeight = $(this).height();
+	　　if(scrollTop + windowHeight == scrollHeight)
+		{
+			page++;
+			addAjaxHtml( page )
+		}
+	})
+}
+
+
+
+function addAjaxHtml( page )
+{
+    var ajaxUrl = grtAjaxUrl();
+    console.log( ajaxUrl );
+    $('.loading').show();
+	setTimeout(function(){
+
+		let pagesize = 6;
+		
+		let dataTopArr = [];
+		let dataBottomArr = [];
+		let initialShow = $('.show').length;
+		
+		yDataAjax( ajaxUrl+"Home/Article/artcate" , "get" , {
+			pagesize : pagesize,
+			p : page
+		} , function( data ){
+			
+			// console.log( data )
+			if( data.status )
+			{
+				
+				$.each( data.data , function(index, val) {
+
+					if(index % 2 == 0){
+						dataTopArr.push( val )
+					}
+				});
+				$.each( data.data , function(index, val) {
+
+					if(index % 2 == 1){
+						dataBottomArr.push( val )
+					}
+				});	
+
+
+				$.each( dataTopArr , function(index, val) {
+					
+					$('.main').append(
+						`<div class="show">
+							<b><img src="${val.c_image}" alt=""><span></span></b>
+							<div class="showTop" artcate_id="${val.artcate_id}"><p><a>${val.c_title}</a></p></div>
+						</div>`)
+				});
+
+							
+
+				if( initialShow != 0 )
+				{
+
+					
+
+					if( dataBottomArr.length != 0 )
+					{
+
+						if(dataBottomArr.length % 2 == 0)
+						{
+
+							for ( var i = 0 ; i < dataBottomArr.length; i++) {
+				
+								$('.show').eq(initialShow).append(
+									`<b><img src="${dataBottomArr[i].c_image}" alt=""><span></span></b>
+										<div class="showBottom" artcate_id="${dataBottomArr[i].artcate_id}"><p><a>${dataBottomArr[i].c_title}</a></p></div>`)
+
+							}
+						}
+						else
+						{
+
+							for ( var i = 0 ; i < dataBottomArr.length; i++) {
+
+								$('.show').eq(initialShow).append(
+									`<b><img src="${dataBottomArr[i].c_image}" alt=""><span></span></b>
+										<div class="showBottom" artcate_id="${dataBottomArr[i].artcate_id}"><p><a>${dataBottomArr[i].c_title}</a></p></div>`)
+
+							}
+							if( dataBottomArr.length >= 1 && ($('.show').length-initialShow) % 2 == 0 )
+							{
+
+								initialShow = $('.show').length;
+
+								$('.show').eq(initialShow-1).append(`<b><img src="" alt=""><span></span></b>
+									<div class="shoTop"><p><a></a></p></div>`)
+								
+							}
+						}
+
+					}
+					else
+					{
+						$('.show').eq(initialShow).append(`<b><img src="" alt=""><span></span></b>
+									<div class="shoTop"><p><a></a></p></div>`)
+					}
+
+				}
+				else
+				{
+					
+					$.each( $('.show'), function(index, val) {
+						
+						if( dataBottomArr[index] == undefined )
+						{
+							console.log( $(this).find('b').length )
+
+							$(this).append(`<b><img src="" alt=""><span></span></b>
+									<div class="shoTop"><p><a></a></p></div>`)
+						}
+						else
+						{
+							$(this).append(
+								`<b><img src="${dataBottomArr[index].c_image}" alt=""><span></span></b>
+									<div class="showBottom" artcate_id="${dataBottomArr[index].artcate_id}"><p><a>${dataBottomArr[index].c_title}</a></p></div>`)
+						}
+
+					});
+				}
+                loadImg(  $('.show div b img') );
+				$(".show > div[artcate_id]").click(function () {
+					window.location.href = "european_style.html?artcate_id="+$(this).attr("artcate_id");
+                })
+			}
+
+			if( page >= data.totalpage )
+			{
+				$(window).unbind("scroll");
+				$('.main').append("<p class='bottom'>到底了</p>")
+			}
+
+		} )
+
+	},1000)
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+

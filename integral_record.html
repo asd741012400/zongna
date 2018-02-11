@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>积分记录</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/integral_record.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+<div class="padding">
+	<div class="tab">
+		<div data-class='record' class="active">
+			<a href="javascript:;" title="">兑换记录</a>
+			<span></span>
+		</div>
+		<em></em>
+		<div data-class='detail'>
+			<a href="javascript:;" title="">积分明细</a>
+			<span></span>
+		</div>
+	</div>
+</div>
+<div class="content">
+	<div class="record">
+
+			<div class="commodity">
+
+				<ul>
+				</ul>
+			</div>
+
+	</div>
+	<div class="detail">
+		<div class="padding">
+			<div class="integral_title">
+				<p></p>
+				<div>积分明细</div>
+				<p></p>
+			</div>
+			<div class="integral_detail">
+				<h1>
+					<a>时间</a>
+					<span>形式</span>
+					<i>积分</i>
+				</h1>
+				<ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="loading">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+<style>
+
+
+</style>
+
+
+<script src="js/public.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+    var ajaxUrl = grtAjaxUrl();
+    // var uId = localStorage.getItem("uId");
+    // var uId = 1;
+    var user_Id = localStorage.getItem("userId");
+    var exchangeListPage = 1,
+		exchangeListPageSize = 4,
+    	integralDetailPage = 1,
+        integralDetailPageSize = 20;
+    exchangeList( ajaxUrl , exchangeListPage , exchangeListPageSize , user_Id  )
+	scrollEv( ajaxUrl , exchangeListPage , exchangeListPageSize , user_Id , exchangeList )
+    $('.tab > div').click(function(){
+
+        $(this).addClass('active').siblings('div').removeClass('active');
+
+        if( $(this).attr("data-class") == "record" )
+        {
+        	$('.commodity ul').html("")
+            exchangeList( ajaxUrl , exchangeListPage , exchangeListPageSize , user_Id  );
+            scrollEv( ajaxUrl , exchangeListPage , exchangeListPageSize , user_Id , exchangeList )
+            $('.record' ).show().siblings(".detail").hide()
+		}
+		else if( $(this).attr("data-class") == "detail" )
+		{
+			$('.integral_detail ul').html("")
+            integralDetail( ajaxUrl , integralDetailPage , integralDetailPageSize , user_Id  );
+            scrollEv( ajaxUrl , integralDetailPage , integralDetailPageSize , user_Id , integralDetail )
+            $('.detail' ).show().siblings(".record").hide()
+		}
+
+
+    })
+
+
+})
+function scrollEv( ajaxUrl , page , pageSize , user_Id , htmlFn )
+{
+    $(window).unbind("scroll");
+    $('body p.bottom').remove();
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight)
+        {
+            page++;
+            addAjaxHtml( ajaxUrl , page , pageSize , user_Id , htmlFn )
+        }
+    })
+}
+
+
+
+function addAjaxHtml( ajaxUrl , page , pageSize , user_Id , htmlFn )
+{
+    $('.loading').show();
+    setTimeout(function(){
+        htmlFn( ajaxUrl , page , pageSize  , user_Id );
+
+    },1000)
+}
+function exchangeList( ajaxUrl , page , pageSize , user_Id) {
+
+
+    yDataAjax( ajaxUrl+"Home/Integral/exchangeList" , "get" , {
+        user_id : user_Id,
+        pagesize : pageSize,
+        p : page
+    } , function( data ) {
+
+        if( data.status )
+        {
+
+            console.log( data )
+
+			if( data.data )
+			{
+				$.each( data.data , function(index,val) {
+
+				  $('.commodity ul').append(
+				      `<li>
+							<h1>兑换时间：${val.c_create_time}</h1>
+							<div class="commodity_details">
+								<b><img src="${val.c_image}" alt=""></b>
+								<div>
+									<a>${val.c_title}</a>
+									<p>
+										<span>积分：<i>${val.c_integral}</i></span>
+										<strong class="f2">${val.c_status}</strong>
+									</p>
+								</div>
+							</div>
+							<h3>${val.c_provinces}${val.c_city}${val.c_zone}${val.c_street}</h3>
+						</li>`)
+
+                })
+                loadImg(  $('.commodity ul li .commodity_details b img') );
+			}
+			else
+			{
+                $('.loading').hide();
+			}
+
+
+
+            if( page >= data.totalpage )
+            {
+                $(window).unbind("scroll");
+                $('body').append("<p class='bottom'>到底了</p>")
+            }
+        }
+
+
+
+
+    })
+
+}
+
+
+function integralDetail( ajaxUrl , page , pageSize , user_Id) {
+
+
+    yDataAjax( ajaxUrl+"Home/Integral/integralDetail" , "get" , {
+        user_id : user_Id,
+        pagesize : pageSize,
+        p : page
+    } , function( data ) {
+
+        if( data.status )
+        {
+
+            console.log( data )
+
+            if( data.data )
+            {
+                $.each( data.data , function(index,val) {
+
+					$('.detail .padding .integral_detail ul').append(
+					    `<li>
+							<a>${val.c_create_time}</a>
+							<span>${val.c_type}</span>
+							<i>${val.c_inte_detail}</i>
+						</li>`)
+
+                })
+                loadImg( $('.detail .padding .integral_detail ul li') );
+            }
+            else
+            {
+                $('.loading').hide();
+            }
+
+
+
+            if( page >= data.totalpage )
+            {
+                $(window).unbind("scroll");
+                $('body').append("<p class='bottom'>到底了</p>")
+            }
+        }
+
+
+
+
+    })
+
+}
+</script>
+
+
+</body>
+</html>
+
+
+

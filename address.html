@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>收货地址管理</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/address.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+<div class="address">
+</div>
+<p class="add_address">
+	<i>+</i>
+	<span>新增收货地址</span>
+</p>
+
+
+
+<style>
+
+</style>
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+
+    var ajaxUrl = grtAjaxUrl();
+	// var uId = localStorage.getItem("uId");
+	var user_Id = localStorage.getItem("userId");
+	var Request = GetRequest();
+	var address = Request["address"];
+    // var uId = 1;
+	yDataAjax( ajaxUrl+"Home/Goods/address" , "get" , {
+        user_id : user_Id
+    } , function( data ) {
+
+	    if( data.status )
+	    {
+	    	if( data.data )
+	    	{
+
+	    	
+		        $.each( data.data , function(index,val) {
+	                $('.address').append(
+	                    `<div class="address_list" address_id="${val.address_id}">
+	                    		<div class="detail">
+									<h1>
+										<a>收货人：${val.c_name}</a>
+										<span>${val.c_tel}</span>
+									</h1>
+									<p>${val.c_provinces}${val.c_city}${val.c_zone}${val.c_street}</p>
+								</div>
+								<div class="compile">
+									<span></span>
+									<a>
+										<i>编辑</i>
+										<b>删除</b>
+									</a>
+								</div>
+							</div>`)
+
+		            if( val.c_isdefault == 1 )
+		            {
+		                $('.address_list[address_id='+val.address_id+']').find("div").find("span").addClass("active");
+	                    $('.address_list[address_id='+val.address_id+']').find("div").find("span").html("默认地址")
+	                }
+
+            })
+            }
+
+			$('.address .address_list div a i').click(function(event) {
+
+			    window.location.href = "add_address.html?address_id="+$(this).parents(".address_list").attr("address_id")
+
+            })
+
+            $('.address .address_list div a b').click(function(event) {
+
+                var parentsLi = $(this).parents(".address_list");
+               yDataAjax( ajaxUrl+"Home/User/addressDel" , "get" , {
+                   address_id : $(this).parents(".address_list").attr("address_id"),
+                   user_id : user_Id
+			   } , function( data ) {
+
+
+
+                   if( data.status )
+                   {
+                       parentsLi.remove()
+                       alert( data.msg )
+				   }
+				   else
+				   {
+                       alert( data.msg )
+				   }
+
+               })
+
+            })
+		}
+
+    })
+
+    $('.add_address').click(function() {
+        window.location.href = "add_address.html"
+    })
+
+    if( address )
+    {
+    	console.log(111)
+		$('.address').delegate( ".address_list .detail" , "click" , function() {
+
+		    window.location.href = "confirm_an_order.html?address_id="+$(this).parent('.address_list').attr("address_id");
+
+	    })
+    }
+	
+})
+
+</script>
+
+
+</body>
+</html>
+
+
+

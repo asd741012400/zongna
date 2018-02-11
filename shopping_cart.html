@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>购物车</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/shopping_cart.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+<div class="null">
+	<div>
+		<span><img src="images/shoppingCart_lan.png" alt=""></span>
+		<p>购物车居然是空的</p>
+		<a href="#">去逛逛</a>
+	</div>                                    
+</div>
+
+
+
+
+<div class="commodity" id="commodity">
+	<h1>聚交家创商城</h1>
+	<ul></ul>
+
+</div>
+
+			
+
+<div class="affirm_delete_bg">
+	<div class="affirm_delete">
+		<p>确认删除选中的<span>2</span>件商品吗？</p>
+		<div>
+			<span>取消</span>
+			<a>确认</a>
+		</div>
+	</div>
+</div>
+
+
+<div class="succeed">
+	<span></span>
+</div>
+
+<div class="total">
+	<span data-flag='true'>全选</span>
+	<p>合计:<i>￥<em id="total_prices">0</em></i></p>
+	<b class="multiterm_delete">删除</b>
+	<a>去结算</a>
+</div>
+<div class="loading">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+
+<footer>
+	<div onclick=" window.location.href = 'home.html'">
+		<span><img src="images/home_a.png" alt=""></span>
+		<p>首页</p>
+	</div>
+	<div class="active" onclick=" window.location.href = 'shopping_cart.html'">
+		<span><img src="images/shoppingCart_b.png" alt=""></span>
+		<p>购物车</p>
+	</div>
+
+	<div onclick=" window.location.href = 'indent.html'">
+		<span><img src="images/indent_a.png" alt=""></span>
+		<p>订单</p>
+	</div>
+
+</footer>
+<style>
+
+</style>
+
+
+<script src="js/public.js"></script>
+<script src="js/order_form.js"></script>
+
+<script type="text/javascript">
+var Url = grtAjaxUrl();
+nDataAjax( Url+"Home/Goods/gogogo" , "get" , function( data ){
+
+	$('.null div a').attr("href" , `./european_style.html?goodscate_id=${data.data.goodscate_id}`)
+	console.log( data.data.goodscate_id )
+
+})
+
+
+</script>
+
+
+</body>
+</html>
+
+
+

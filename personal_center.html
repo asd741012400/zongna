@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>个人中心</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/personal_center.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+<div class="personal_title"><img src="images/personal_bg.jpg" alt=""></div>
+<div class="padding">
+	<div class="head_portrait">
+		<div class="head_portrait_left">
+			<p>签到</p>
+			<span><i></i>天</span>
+		</div>
+		<div class="head_portrait_center">
+			<span></span>
+			<p></p>
+		</div>
+		<div class="head_portrait_right">
+			<p>积分</p>
+			<i></i>
+		</div>
+	</div>
+	<div class="sign_in">
+		<p></p>
+		<div>
+			<span><i>签到送积分</i></span>
+		</div>
+		<p></p>
+	</div>
+</div>
+
+<div class="padding">
+	<div class="my">
+		<ul>
+			<li class="my_integral"><span>我的积分</span></li>
+			<li class="member">
+				<span>会员代码</span>
+				<a></a>
+			</li>
+			<li class="site"><span>地址管理</span></li>
+		</ul>
+	</div>
+</div>	
+
+<div class="padding">
+	<div class="personage">
+		<ul>
+			<li><span>个人资料</span></li>
+		</ul>
+	</div>	
+</div>
+
+
+<div class="qiaodao">
+	<div>
+		<p></p>
+	</div>
+</div>
+<div class="succeed">
+	
+</div>
+
+<div class="explain">
+	<div>
+		<h1>商城积分获取说明</h1>
+		<ul>
+		</ul>
+		<span class="break">跳过<i>3</i>S</span>
+	</div>
+</div>
+<style>
+
+</style>
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript">
+
+$(function(){
+    var ajaxUrl = grtAjaxUrl();
+    // var uId = 1;
+
+    var Request = new Object();
+    Request = GetRequest();
+    // var uid = Request["uid"];
+	
+    // if( uid )
+    // {
+    //     // localStorage.setItem("uId" , uid)
+    //     sessionStorage.userId = uid;
+    //     var user_Id = sessionStorage.getItem("userId");
+    // }
+    // else
+    // {
+    //     // var uId = localStorage.getItem("uId");
+    //     var user_Id = sessionStorage.getItem("userId");
+   	// 	alert( user_Id )
+
+    //     if( !user_Id )
+    //     {
+    //         window.location.href = "http://dasuanshop.com/Home/Wechat/entry?reurl=personal_center";
+    //     }
+    // }
+	var user_Id=localStorage.getItem("userId");
+	if( !user_Id )
+	{
+	    sessionStorage.returnUrl = "personal_center";
+	    window.location.href = "http://dasuanshop.com/Home/Wechat/entry?reurl=test";
+	}
+
+
+	//签到说明
+	{
+		let num = 3;
+		let tmer = null;
+		tmer = setInterval(function(){
+			num--;
+			if( num <= 0 )
+			{
+				$('.explain').hide();
+				clearInterval(tmer);
+			}
+			$('.break i').html( num );
+
+
+		},1000);
+
+		$('.break').click(function(event) {
+			clearInterval(tmer);
+			$('.explain').hide();
+		});
+	}
+
+
+    nDataAjax( ajaxUrl+"Home/Other/integraldetail" , "get" , function( data ) {
+
+        if( data.status )
+        {
+            var aText = data.data.c_integraldetail.split("\n");
+            console.log( aText );
+
+            $.each( aText , function(index,val) {
+                $('.explain div ul').append(`<li>${val}</li>`);
+            })
+
+        }
+
+    });
+
+ucenter()
+function ucenter()
+{
+
+
+	yDataAjax( ajaxUrl+"Home/User/ucenter" , "get" , {
+        user_id : user_Id
+	},function( data ) {
+
+        if( data.status )
+        {
+            $('.head_portrait_left span i').html( data.data.c_day );
+            $('.head_portrait_center span').append( `<img src="${data.data.c_image}" alt="">` );
+            $('.head_portrait_center p').html( data.data.c_username );
+            $('.head_portrait_right i').html( data.data.c_integral );
+            $('.member a').html( data.data.c_code );
+            console.log( data )
+        }
+
+    })
+
+}
+    //签到
+    $('.sign_in div').click(function(event) {
+
+        yDataAjax( ajaxUrl+"Home/User/sign" , "get" , {
+            user_id : user_Id
+        },function( data ) {
+
+        	console.log( data )
+            if( data.status )
+            {
+				$('.qiaodao div p').html( `恭喜您签到成功获得积分<span>${data.integral}</span>` );
+				$('.qiaodao').show();
+            	$('.qiaodao div').show();
+            }
+            else
+			{
+                $('.succeed').html( `<p>${data.msg}</p>` )
+                succeedShow()
+			}
+           
+
+        })
+
+    });
+    $('.qiaodao').click(function(event) {
+        $('.qiaodao').hide();
+        $('.qiaodao div').hide();
+        ucenter()
+    });
+
+})
+
+
+$('.my_integral').click(function() {
+	window.location.href = "my_integral.html"
+})
+
+$('.site').click(function() {
+	window.location.href = "address.html"
+})
+
+$('.personage').click(function() {
+	window.location.href = "personal_data.html"
+})
+
+function succeedShow(){
+	$('.succeed').show();
+	setTimeout(function(){
+		$('.succeed').hide();
+
+	},1000)
+}	
+</script>
+
+
+</body>
+</html>
+
+
+

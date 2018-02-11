@@ -1,0 +1,247 @@
+.my_integral{
+	background: url('../images/integral_bg.jpg') top/100% no-repeat;
+	overflow: hidden;
+	height: 4.3rem;
+}
+.my_integral .integral{
+	width: 2.56rem;
+	height: 2.56rem;
+	background: url('../images/icon_gold.png') center/100% no-repeat;
+	text-align: center;
+	overflow: hidden;
+	margin-top: 0.33rem;
+}
+.my_integral .integral p{
+	font-size: 0.3rem;
+	color: #b55f21;
+	margin-top: 0.58rem;
+}
+.my_integral .integral span{
+	display: block;
+	font-size: 0.2rem;
+	color: #b55f21;
+	font-weight: bold;
+	padding: 0.02rem 0 0.16rem;
+}
+.my_integral .integral span i{
+	font-size: 0.4rem;
+	color: #f23e3e;
+	padding-right: 0.05rem;
+}
+.my_integral .integral a{
+	font-size: 0.22rem;
+	display: block;
+}
+.my_integral .integral a i{
+	border-radius: 0.1rem;
+	border: 1px solid #b55f21;
+	padding: 0.05rem;
+	color: #b55f21;
+}
+
+.my_integral .rule{
+	font-size: 0.24rem;
+	color: #fff;
+	text-align: center;
+	padding-top: 0.12rem;
+}
+
+.my_integral .rule p{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	width: 3.8rem;
+}
+
+.my_integral .rule p span{
+	width: 0.66rem;
+	border-bottom: 1px solid #fff;
+	margin-bottom: 0.2rem;
+}
+
+
+
+.product{
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+}
+.product ul li{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.3rem 0.24rem 0.2rem;
+}
+.product ul li b{
+	width: 1.88rem;
+}
+.product ul li div{
+	flex: 1;
+	padding-left: 0.3rem; 
+}
+.product ul li div a{
+	display: block;
+	font-size: 0.26rem;
+	color: #333333;
+}
+.product ul li div p{
+	padding-top: 0.1rem;
+	overflow: hidden;
+}
+.product ul li div p span{
+	font-size: 0.26rem;
+	color: #666666;
+	float: left;
+	line-height: 0.78rem;
+}
+.product ul li div p span i{
+	color:#f23e3e;
+	font-size: 0.3rem;
+}
+.product ul li div p strong{
+	font-size: 0.26rem;
+	background: #ea5b24;
+	color: #fff;
+	float: right;
+	width: 1.4rem;
+	line-height: 0.58rem;
+	text-align: center;
+	border-radius: 3px;
+}
+
+.succeed{
+	position: fixed;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	width: 5rem;
+	border-radius: 3px;
+	line-height: 1rem;
+	color: #fff;
+	font-size: 0.29rem;
+	text-align: center;
+	left: 50%;
+	margin-left: -2.5rem;
+	top: 50%;
+	margin-top: -0.3rem;
+	display: none;
+	z-index: 10000;
+}
+
+
+
+
+.address_hint{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+.address_hint .address{
+	position: relative;
+	width: 100%;
+	background: #fff;
+	font-size: 0.26rem;
+	position: absolute;
+	bottom: 0;
+}
+.address_hint .address .commodity{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	margin: 0 0.24rem;
+	padding-bottom: 0.2rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.address_hint .address .commodity span{
+	width: 2.76rem;
+	border: 2px solid #e5e5e5;
+	border-radius: 3px;
+	margin-top: -0.54rem;
+}
+.address_hint .address .commodity p{
+	flex: 1;
+	padding:0.6rem 0.3rem 0;
+}
+.address_hint .address .commodity p a{
+	display: block;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	color: #333333;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.address_hint .address .commodity p em{
+	display: block;
+	color:#666666;
+	font-size: 0.24rem;
+}
+.address_hint .address .commodity p em i{
+	color:#f23e3e;
+}
+
+.address_hint .address h3{
+	line-height: 0.6rem;
+	color: #666666;
+	padding: 0 0.24rem;
+	background: #f2f2f2;
+}
+
+.address_hint .address ul{
+	height: 4.78rem;
+	overflow-y: scroll;
+	padding: 0 0.24rem;
+}
+.address_hint .address ul li{
+	padding: 0.1rem 0 0.3rem 0.4rem;
+	margin-top: 0.2rem;
+	border-bottom: 1px solid #e5e5e5;
+	background: url('../images/icon_site_a.png') left 0.16rem/0.2rem 0.24rem no-repeat;
+	color: #333333;
+}
+.address_hint .address ul li.active{
+	background: url('../images/icon_site_b.png') left 0.16rem/0.2rem 0.24rem no-repeat;
+	color: #ea5b24;
+}
+.address_hint .address .else_operation{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	color: #fff;
+	line-height: 0.98rem;
+}
+.address_hint .address .else_operation p{
+	width: 2.5rem;
+	background: #c0c0c0;
+	text-align: center;
+	line-height: 0.88rem;
+}
+.address_hint .address .else_operation p span{
+	font-size: 0.5rem;
+	position: relative;
+	top: 1px;
+	margin-right: 0.1rem;
+}
+.address_hint .address .else_operation a{
+	flex: 1;
+	background: #ea5b24;
+	text-align: center;
+}
+
+.address_hint .address span.close{
+	position: absolute;
+	padding: 0.2rem;
+	top: 0.14rem;
+	right: 0.24rem;
+	width: 0.18rem;
+	height: 0.18rem;
+}

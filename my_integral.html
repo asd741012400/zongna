@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>个人中心</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/my_integral.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+<div class="my_integral">
+	<div class="integral">
+		<p>我的积分</p>
+		<span><i>352</i>分</span>
+		<a><i>积分记录</i></a>
+	</div>
+	<div class="rule">
+		<p>
+			<span></span>
+			<a>积分兑换规则</a>
+			<span></span>
+		</p>
+		<b>积分兑换的奖品邮费需自理</b>
+	</div>
+
+</div>
+
+<div class="product">
+	<ul>
+	</ul>
+</div>
+
+
+<div class="succeed">
+	<span></span>
+</div>
+
+
+<div class="address_hint">
+	
+	<div class="address">
+		<div class="commodity">
+			<span><img src="" alt=""></span>
+			<p>
+				<a></a>
+				<em>积分:<i></i></em>
+			</p>
+		</div>
+		<h3>配送至</h3>
+		<ul>
+			<!--<li class="active">重庆市北部新区全境重庆市北部新区栖霞路18号融创金贸时代19栋3-7</li>-->
+		</ul>
+		<div class="else_operation">
+			<p><span>+</span>其他地址</p>
+			<a>确 定</a>
+		</div>
+		<span class="close"><img src="images/icon_close2.png" alt=""></span>
+	</div>
+
+
+</div>
+<div class="loading">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+
+<style>
+
+</style>
+
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript">
+
+
+
+
+
+var ajaxUrl = grtAjaxUrl();
+var Request = new Object();
+Request = GetRequest();
+var uid = Request["uid"];
+
+// if( uid )
+// {
+//     // localStorage.setItem("uId" , uid)
+//     sessionStorage.userId = uid;
+//     var user_Id = sessionStorage.getItem("userId");
+// }
+// else
+// {
+//     // var uId = localStorage.getItem("uId");
+//     var user_Id = sessionStorage.getItem("userId");
+//     if( !user_Id )
+//     {
+//         window.location.href = "http://dasuanshop.com/Home/Wechat/entry?reurl=my_integral";
+//     }
+// }
+
+var user_Id=localStorage.getItem("userId");
+
+    if( !user_Id )
+    {
+        sessionStorage.returnUrl = "my_integral";
+        window.location.href = "http://dasuanshop.com/Home/Wechat/entry?reurl=test";
+    }
+    
+// var uId = 1;
+var page = 1,
+    pageSize = 4;
+
+//	总积分
+yDataAjax( ajaxUrl+"Home/Integral/myintegral" , "get" , {
+    user_id : user_Id
+},function( data ) {
+
+    if( data.status )
+    {
+        $('.integral span i').html( data.totalintegral )
+    }
+})
+
+
+
+integralDetail( ajaxUrl , page , pageSize )
+scrollEv(  page , pageSize , integralDetail )
+function scrollEv(  page , pageSize  , htmlFn )
+{
+    $(window).unbind("scroll");
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight)
+        {
+            page++;
+            addAjaxHtml(  page , pageSize , htmlFn )
+        }
+    })
+}
+
+
+
+function addAjaxHtml(  page , pageSize  , htmlFn )
+{
+    $('.loading').show()
+    setTimeout(function(){
+        htmlFn( ajaxUrl , page , pageSize );
+		console.log(111111)
+    },1000)
+}
+
+function integralDetail( ajaxUrl , page , pageSize ){
+    yDataAjax( ajaxUrl+"Home/Integral/integralGoodsList" , "get" , {
+        pagesize : pageSize,
+        p : page,
+    },function( data ) {
+
+        if( data.status )
+        {
+            $.each( data.data , function(index,val) {
+
+                $('.product ul').append(
+                    `<li integral_goods_id="${val.integral_goods_id}">
+						<b><img src="${val.c_image}" alt=""></b>
+						<div>
+							<a>${val.c_title}</a>
+							<p>
+								<span>积分：<i>${val.c_integral}</i></span>
+								<strong>立即兑换</strong>
+							</p>
+						</div>
+					</li>`)
+
+            })
+            loadImg(  $('.product ul li b img') );
+
+
+            if( page >= data.totalpage )
+            {
+                $(window).unbind("scroll");
+                $('body').append("<p class='bottom'>到底了</p>")
+            }
+
+        }
+    })
+}
+
+
+$('.product ul').delegate( " li div p strong", "click" ,function(){
+    let imgUrl = $(this).parents("li").find('b').find('img').attr("src");
+    let title = $(this).parents("li").find('div').find('a').html();
+    let integral = $(this).parents("li").find('p').find('span').find('i').html();
+    let integral_goods_id = $(this).parents("li").attr("integral_goods_id");
+    console.log(0)
+    selectSite( $(this) , imgUrl , title , integral , integral_goods_id );
+
+})
+
+function selectSite( obj , imgUrl , title , integral , integral_goods_id )
+{
+
+    $('.commodity span img').attr("src" , imgUrl)
+    $('.commodity p a').html( title )
+    $('.commodity p em i').html( integral )
+	$('body').css({
+		height : "100%",
+        overflow: "hidden"
+	})
+
+    yDataAjax( ajaxUrl+"Home/Goods/address" , "get" , {
+        user_id : user_Id
+    } , function( data ) {
+        if( data.status )
+        {
+            $('.address_hint ul').html("")
+            if( data.data )
+            {
+				$.each( data.data , function(index,val) {
+
+				    $('.address_hint ul').append(`<li address_id="${val.address_id}" c_isdefault="${val.c_isdefault}">${val.c_provinces}${val.c_city}${val.c_zone}${val.c_street}</li>`)
+				})
+				$('.address_hint ul li[c_isdefault=1]').addClass("active");
+
+                $('.address_hint ul li').click(function(event) {
+
+                    $(this).addClass("active").siblings('li').removeClass("active");
+
+
+                })
+
+				$('.else_operation a').click(function() {
+
+				    let address_id;
+
+				    $.each(  $('.address_hint ul li') , function(index,val) {
+
+				        if( $(this).hasClass("active") )address_id = $(this).attr("address_id");
+
+                    })
+                    console.log("address_id" , address_id)
+                    console.log("integral_goods_id" , integral_goods_id)
+                    console.log("user_Id" , user_Id)
+                    yDataAjax( ajaxUrl+"Home/Integral/exchange" , "get" , {
+                        user_id : user_Id,
+                        integral_goods_id : integral_goods_id,
+                        address_id : integral_goods_id,
+                    } , function(data) {
+
+                        
+                        $('.address_hint').hide();
+                        $('body').css({
+                            height : "auto",
+                            overflow: "auto"
+                        })
+                        succeedShow( data.msg )
+                        $('.else_operation a').unbind("click")
+                        if( data.status )
+                        {
+                            window.location.href = window.location.href;
+                        }
+                    })
+
+                })
+
+            }
+		}
+        console.log( data )
+	})
+
+    $('.address_hint').show();
+
+    $('.address_hint .address > span').click(function(event) {
+        $('.address_hint').hide();
+        $('body').css({
+            height : "auto",
+            overflow: "auto"
+        })
+    });
+/*
+    $('.address_hint .address .else_operation a').click(function(event) {
+        $('.address_hint').hide();
+        succeedShow()
+        obj.html( "已兑换" );
+        obj.css("background" , "#ccc")
+    });*/
+
+    $('.else_operation p').click(function(index,val) {
+        window.location.href = "add_address.html?url=my_integral"
+    })
+
+
+}
+
+$('.integral a i').click(function() {
+    window.location.href = "integral_record.html"
+})
+
+function succeedShow( text ){
+    $('.succeed').html( `<span>${text}</span>` )
+    $('.succeed').show();
+    setTimeout(function(){
+        $('.succeed').hide();
+
+    },1000)
+}
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+

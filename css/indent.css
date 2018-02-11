@@ -1,0 +1,195 @@
+body{
+	background: #f2f2f2;
+}
+
+.tab_title{
+	padding: 0 0.24rem;
+	background: #fff;
+}
+.tab_title div{
+	border-bottom: 1px solid #e5e5e5;
+	height: 0.8rem;
+	line-height: 0.88rem;
+	overflow: hidden;
+}
+.tab_title div a{
+	color: #333333;
+	flex: 1;
+	font-size: 0.28rem;
+	height: 0.76rem;
+	float: left;
+	margin-right: 0.7rem;
+}
+.tab_title div a:last-of-type{
+	margin-right: 0;
+}
+.tab_title div a.active{
+	border-bottom: 2px solid #f03e3e;
+	color: #f03e3e;
+}
+
+.indent{
+	margin-bottom: 0.2rem;
+}
+.indent > div{
+	
+	overflow: hidden;
+}
+.indent > div > div{
+	background: #fff;
+	padding: 0rem 0.24rem 0;
+	overflow: hidden;
+	margin-bottom: 0.2rem;
+}
+.indent > div > div ul li{
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 0.3rem;
+	padding-top: 0.3rem;
+}
+.indent > div > div ul li b.details_img{
+	float: left;
+	overflow: hidden;
+	width: 1.88rem;
+	padding-right: 0.14rem;
+}
+.indent > div > div ul li div{
+	float: left;
+	width: 5rem;
+}
+.indent > div > div ul li div h2{
+	font-size: 0.26rem;
+	margin: 0;
+	width: 4.2rem;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+.indent > div > div ul li div span{
+	font-size: 0.26rem;
+	display: block;
+	color: #999999;
+	width: 4.2rem;
+	margin: 0;
+}
+.indent > div > div ul li div p{
+	overflow: hidden;
+}
+.indent > div > div ul li div p b{
+	font-size: 0.32rem;
+	float: left;
+}
+.indent > div > div ul li div p em{
+	font-size: 0.24rem;
+	color: #f23e3e;
+	float: left;
+	padding-left: 0.2rem;
+	line-height: 0.42rem;
+}
+.indent > div > div ul li div p strong{
+	width: 0.7rem;
+	float: left;
+	margin-top: 0.08rem;
+}
+.indent > div > div ul li div p i{
+	float: right;
+	font-size: 0.26rem;
+	color: #666666;
+}
+.indent > div > div .dispatching{
+	overflow: hidden;
+	height: 0.8rem;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 0.8rem;
+}
+.indent > div > div .dispatching span{
+	float: left;
+	color: #f03e3e;
+	font-size: 0.28rem;
+}
+.indent > div > div .dispatching a{
+	float: right;
+	color: #333333;
+	font-size: 0.23rem;
+}
+.indent > div > div .dispatching a em{
+	font-size: 0.3rem;
+}
+
+.indent > div > div .payment{
+	font-size: 0.26rem;
+	float: right;
+	padding: 0.14rem 0;
+}
+.indent > div > div .payment span{
+	float: left;
+	width: 1.5rem;
+	text-align: center;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	border-radius: 0.3rem;
+	border: 1px solid #c0c0c0;
+	margin-left: 0.2rem;
+}
+
+.indent > div > div .payment span.fu{
+	border: 1px solid #ea5b24;
+	color: #ea5b24;
+}
+.indent > div > div .payment span.affirm{
+	border: 1px solid #ea5b24;
+	color: #ea5b24;
+}
+.indent > div > div .payment span.commentBtn{
+	border: 1px solid #ea5b24;
+	color: #ea5b24;
+}
+.tan{
+	background: rgba(0, 0, 0, 0.5);
+	top: 0;
+	left: 0;
+	position: fixed;
+	z-index: 9999;
+	height: 100%;
+	width: 100%;
+	display: none;
+}
+.tan ul{
+	width: 6.2rem;
+	height: 3rem;
+	background: #fff;
+	font-size: 0.3rem;
+	border-radius: 5px;
+	margin-top: 50%;
+	display: none;
+}
+.tan ul li{
+	text-align: center;
+	width: 5.7rem;
+	overflow: hidden;
+}
+.tan ul li p{
+	margin-top: 1rem;
+	margin-bottom: 0.54rem;
+}
+.tan ul li span{
+	float: left;
+	width: 2.72rem;
+	line-height: 0.8rem;
+	height: 0.8rem;
+	border: 1px solid #c0c0c0;
+	border-radius: 10px;
+}
+.tan ul li a{
+	float: right;
+	width: 2.74rem;
+	line-height: 0.82rem;
+	height: 0.82rem;
+	border-radius: 10px;
+	color: #fff;
+	background: #ea5b24;
+}
+p.bottom{
+	margin-bottom: 1.2rem;
+}

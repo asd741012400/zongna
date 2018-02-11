@@ -1,0 +1,245 @@
+body{
+	background: #f2f2f2;
+}
+.padding{
+	padding: 0 0.24rem;
+	background:#fff;
+}
+.head_portrait{
+	clear: both;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	padding: 0 0.24rem;
+}
+
+.head_portrait .head_portrait_left{
+	font-size: 0.3rem;
+	padding-top: 0.4rem;
+	text-align: center;
+	flex: 1;
+}
+.head_portrait .head_portrait_left span{
+	display: block;
+	padding-top: 0.2rem;
+}
+.head_portrait .head_portrait_left span i{
+	font-size: 0.36rem;
+	color: #ea5b24;
+}
+.head_portrait .head_portrait_center{
+	font-size: 0.3rem;
+	text-align: center;
+	flex: 1;
+}
+
+.head_portrait .head_portrait_center span{
+	display: block;
+	width: 1.6rem;
+	height: 1.6rem;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 5px solid #f2f2f2;
+	margin-top: -0.8rem;
+	margin-bottom: 0.2rem;
+}
+.head_portrait .head_portrait_right{
+	padding-top: 0.4rem;
+	text-align: center;
+	flex: 1;
+	font-size: 0.3rem;
+}
+.head_portrait .head_portrait_right i{
+	font-size: 0.36rem;
+	padding-top: 0.2rem;
+	color: #ea5b24;
+	display: block;
+}
+
+
+.sign_in{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	font-size: 0.2rem;
+	padding: 0.14rem 0.24rem 0.3rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.sign_in p{
+	width: 2.2rem;
+	border-bottom: 1px dashed #ea5b24;
+	margin-bottom: 0.34rem;
+}
+.sign_in div{
+	flex: 1;
+	text-align: center;
+	line-height: 0.58rem;
+}
+.sign_in div span{
+	display: block;
+	width: 1.5rem;
+	border: 1px solid #ea5b24;
+	border-radius: 0.3rem;
+	padding: 3px;
+}
+.sign_in div span i{
+	display: block;
+	border-radius: 0.26rem;
+	background: #ea5b24;
+	color: #fff;
+}
+
+
+.my{
+	margin-top: 0.2rem;
+	line-height: 1rem;
+	font-size: 0.28rem;
+}
+.my ul li{
+	border-bottom: 1px solid #e5e5e5;
+	background: url('../images/icon_arrows.png') right/0.14rem 0.24rem no-repeat;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+.my ul li.member{
+	background: none;
+}
+.my ul li span{
+	flex: 1;
+}
+.my ul li a{
+	text-align: right;
+	width: 3rem;
+	display: block;
+	color: #ea5b24;
+}
+.my ul li.my_integral span{
+	margin-left: 2px;
+	padding-left: 0.56rem;
+	background: url('../images/icon_indent.png') left/0.38rem 0.4rem no-repeat;
+}
+.my ul li.member span{
+	padding-left: 0.54rem;
+	margin-left: 2px;
+	background: url('../images/icon_member.png') left/0.39rem 0.4rem no-repeat;
+}
+.my ul li.site span{
+	padding-left: 0.55rem;
+	margin-left: 2px;
+	background: url('../images/icon_site_3.png') left/0.34rem 0.45rem no-repeat;
+}
+
+.personage{
+	margin-top: 0.2rem;
+	line-height: 1rem;
+	font-size: 0.28rem;
+}
+.personage ul li{
+	border-bottom: 1px solid #e5e5e5;
+	background: url('../images/icon_arrows.png') right/0.14rem 0.24rem no-repeat;
+}
+.personage ul li span{
+	display: block;
+	margin-left: 2px;
+	padding-left: 0.6rem;
+	background: url('../images/icon_setting.png') left/0.39rem 0.37rem no-repeat;
+}
+
+
+
+
+.explain{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+.explain div{
+	overflow: hidden;
+	width: 6.16rem;
+	height: 5.96rem;
+	background: url('../images/integral_get_bg.png') center/100% no-repeat;
+	font-size: 0.26rem;
+	margin-top: 50%;
+	position: relative;
+}
+.explain div h1{
+	font-size: 0.29rem;
+	background: url('../images/integral_get_title.png')center/100% no-repeat;
+	line-height: 0.88rem;
+	width: 4.94rem;
+	text-align: center;
+	color: #af462e;
+	margin-top: 0.7rem;
+}
+.explain div ul{
+	width: 4.8rem;
+	margin-top: 0.8rem;
+	color: #af462e;
+}
+.explain div ul li{
+	line-height: 0.42rem;
+	
+}
+
+
+.break{
+	position: absolute;
+	padding: 0.1rem 0.2rem;
+	font-size: 0.24rem;
+	color: #af462e;
+	border-bottom: 1px solid #f9bfa8;
+	right: 0.78rem;
+	bottom: 0.78rem;
+}
+
+.qiaodao{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	top: 0;
+	display: none;
+}
+.qiaodao div{
+	display: none;
+	width: 5.56rem;
+	height: 4.4rem;
+	background: url('../images/qiaodao.png') center/100% no-repeat;
+	font-size: 0.32rem;
+	color: #666666;
+	margin-top: 50%;
+}
+.qiaodao div p{
+	width: 3rem;
+	text-align: center;
+	padding-top: 2.8rem;
+}
+
+
+.succeed{
+	position: fixed;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	width: 3.4rem;
+	border-radius: 10px;
+	color: #fff;
+	font-size: 0.29rem;
+	text-align: center;
+	left: 50%;
+	margin-left: -1.7rem;
+	top: 50%;
+	margin-top: -1.4rem;
+	display: none;
+	z-index: 10000;
+	padding: 0.2rem;
+}
+

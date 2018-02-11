@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>确认订单</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/confirm_an_order.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+<div class="consignee">
+	<!--<h1>收货人：<span>张三丰</span><i>133***8251</i></h1>-->
+<!--<p>重庆市 渝北区 重庆市渝北区泰山大道东段28号（东湖南路社区）10-3</p>-->
+	<!-- <p>请填写收货地址</p> -->
+</div>
+
+<div class="details">
+	<ul>
+	</ul>
+	<p class="dispatching">
+		<span>配送方式</span>
+		<a>快递 免邮</a>
+	</p>
+</div>
+
+<div class="vip_code">
+	<p>
+		<a>会员码</a>
+		<span> 请输入会员码，立享会员价 </span>
+	</p>
+</div>
+
+
+<div class="put_in">
+	<p>实付款：￥<span></span></p>
+	<a>提交订单</a>
+</div>
+
+<div class="import">
+	<div>
+		<p><input class="import_message" placeholder="请输入会员码"></p>
+		<span>确认</span>
+	</div>
+</div>
+
+<style>
+
+</style>
+
+
+<script src="js/public.js"></script>
+<script src="js/pay.js"></script>
+<script type="text/javascript">
+
+// var uId = localStorage.getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// let uId = 1;
+var ajaxUrl = grtAjaxUrl();
+var sCommodityData = localStorage.getItem("sCommodityData");
+var aCommodityData = sCommodityData.split("^");
+var oCommodityData = {};
+var totalPrices = 0,
+    vipTotalPrices = 0;
+Request = GetRequest();
+var addressId = Request["address_id"];
+// var oCommodityData = JSON.parse(sCommodityData);
+for( var i = 0; i < aCommodityData.length-1; i++)
+{
+    oCommodityData[i] = JSON.parse(aCommodityData[i]);
+
+}
+
+console.log(oCommodityData)
+$.each( oCommodityData , function(index,val) {
+
+    totalPrices += parseFloat(val.price) * val.num;
+    vipTotalPrices += parseFloat(val.vipprice) * val.num;
+	$('.details ul').append(
+	    `<li goodsId="${val.goodsId}" guigeId="${val.guigeId}" cartId="${val.cartId}" num="${val.num}" merchantId="${val.merchantId}">
+			<b class="details_img"><img src="${val.image}" alt=""></b>
+			<div>
+				<h2>${val.title}</h2>
+				<span>规格：${val.guige}</span>
+				<p>
+					<b>¥${val.price}</b>
+					<em>¥${val.vipprice}</em>
+					<strong><img src="images/VIP_price.png" alt=""></strong>
+					<i>x${val.num}</i>
+				</p>
+			</div>
+		</li>`)
+})
+
+
+
+
+
+yDataAjax( ajaxUrl+"Home/Order/address" , "get" , {
+    user_id : user_Id,
+    address_id : addressId
+} , function( data ) {
+    $('.consignee').html("")
+    if( data.status == 1 )
+    {
+        console.log( data )
+        $('.consignee').attr("addressid" , data.data.c_address_id)
+        $('.consignee').html(
+			`<h1>收货人：<span>${data.data.c_name}</span><i>${data.data.c_tel}</i></h1>
+			<p>${data.data.c_provinces}${data.data.c_city}${data.data.c_zone}${data.data.c_street}</p>`)
+	}
+	else
+	{
+	    $('.consignee').append("<p>请填写收货地址</p>")
+	}
+
+})
+
+
+
+
+
+
+yDataAjax( ajaxUrl+"Home/Order/isvip" , "get" , {
+    user_id : user_Id,
+} , function( data ) {
+    if( data.status == 1 )
+    {
+    	$('.vip_code p span').html(`${data.data}`);
+		$('.put_in p span').html(vipTotalPrices.toFixed(2))
+	}
+	else
+	{
+		$('.put_in p span').html(totalPrices.toFixed(2))
+	}
+
+
+})
+
+
+
+
+
+$(document).ready(function () {
+
+	$('.vip_code p span').click(function(event) {
+        $('.import').show();
+        $('.import_message').trigger("click").focus()
+	});
+    $('.import span').click(function(event) {
+        event.stopPropagation();
+        var code = $('.import_message').val();
+
+
+
+        if( $('.import_message').val() == "")
+        {
+            $('.vip_code p span').html("请输入会员码，立享会员价 ");
+        }
+        else
+        {
+            yDataAjax( ajaxUrl+"Home/Goods/iscode" , "post" , {
+                c_code : code,
+            } , function( data ) {
+
+                if( data.status )
+                {
+                    $('.put_in p span').html(vipTotalPrices.toFixed(2))
+                    $('.vip_code p span').html($('.import_message').val());
+                }
+                else
+                {
+                    alert( data.msg )
+                }
+
+            })
+
+        }
+        $('.import').hide();
+    });
+    $('.import div').click(function(event) {
+        event.stopPropagation();
+    });
+    $('.import').click(function(event) {
+        $(this).hide();
+    });
+
+});
+
+$('.put_in a').click(function() {
+	let oCommodityData = {};
+
+	$.each( $('.details ul li') , function(index,val) {
+		oCommodityData[index]={};
+		oCommodityData[index].c_goods_id = $(this).attr("goodsid");
+		oCommodityData[index].c_merchant_id = $(this).attr("merchantId");
+		oCommodityData[index].c_guige_id = $(this).attr("guigeId");
+		oCommodityData[index].c_num =  $(this).attr("num");
+	})
+
+
+    if( !addressId )
+    {
+        addressId = $('.consignee').attr("addressid")
+    }
+
+
+	yDataAjax( ajaxUrl+"Home/Order/order" , "post" , {
+        c_user_id : user_Id,
+        c_address_id : addressId,
+        c_code : $('.vip_code p span').html(),
+        list : oCommodityData,
+    } , function( data ) {
+
+	    if( data.status )
+	    {
+
+
+	    	console.log( data )
+			localStorage.setItem( "sCommodityData" , "" )
+
+			getPay( data.c_payorder_id , user_Id , "../indent.html" , true ) 
+
+		}
+		else
+		{
+		    alert( data.msg )
+		}
+
+    })
+
+});
+
+
+//收货人
+$('.consignee').click(function() {
+	window.location.href = "address.html?address=true"
+})
+</script>
+
+
+</body>
+</html>
+
+
+

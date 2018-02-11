@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+    <title>聚交家创商城</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+
+<div>
+    <span><img src="" alt=""></span>
+    <p>跳过 <b></b>s</p>
+</div>
+
+<style>
+html,body{
+    height: 100%;
+    overflow: hidden;
+}
+div{
+    position: relative;
+    height: 100%;
+}
+div span{
+    overflow: hidden;
+    display: block;
+}
+div p{
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.24rem;
+    z-index: 100;
+    font-style: "微软雅黑";
+    font-size: 0.24rem;
+    background: rgba(0,0,0,0.2);
+    border-radius: 0.3rem;
+    width: 1.4rem;
+    height: 0.56rem;
+    line-height: 0.56rem;
+    color: #fff;
+    text-align: center;
+}
+</style>
+
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+    var Request = new Object();
+        Request = GetRequest();
+        //var uid = Request["uid"];
+        var user_Id=localStorage.getItem("userId");
+
+
+        if( !user_Id )
+        {
+
+            sessionStorage.returnUrl = "index";
+            window.location.href = "http://dasuanshop.com/Home/Wechat/entry?reurl=test";
+        }
+
+
+
+
+        var ajaxUrl = grtAjaxUrl();
+        console.log(ajaxUrl )
+       nDataAjax( ajaxUrl+"Home/Other/kpimage" , "get" ,  function( data ){
+
+            if( data.status )
+            {
+                $('div span img').attr("src" , data.data.c_kpimage );
+                var num = data.data.c_kptime;
+                $('div p b').html( num )
+                setInterval(function(){
+                    num--;
+                    if( num <= 0 ) window.location.href = "home.html";
+                    $('div p b').html( num )
+
+                },1000)
+                $('div p').click(function () {
+                    window.location.href = "home.html";
+                })
+            }
+        })
+    })
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,153 @@
+body{
+	background: #f2f2f2;
+}
+.import{
+	background: #fff;
+	margin-top: 0.2rem;
+	font-size: 0.26rem;
+	padding: 0 0.24rem;
+}
+.import ul li{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	line-height: 0.9rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.import ul li:last-of-type{
+	height: 1.5rem;
+}
+.import ul li.arrows{
+	background: url('../images/icon_arrows.png') right/0.13rem 0.24rem no-repeat;
+}
+.import ul li span{
+	color: #333333;
+}
+.import ul li a{
+	padding-right: 0.34rem;
+	color: #666666;
+	flex: 1;
+	text-align: right;
+}
+.import ul li a input{
+	height: 100%;
+	outline: medium;
+	text-align: right;
+	color: #666666;
+	border: 0;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	font-size: 0.26rem;
+	background: none;
+}
+.import ul li a div.mui-content{
+	background-color: #fff;
+}
+.import ul li a div.mui-content div.mui-content-padded{
+	margin: 0;
+}
+.import ul li a div.mui-content div.mui-content-padded p{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-size: 0.26rem;
+	line-height: 0.9rem;
+	text-align: right;
+	color: #666666;
+}
+.import ul li:last-child{
+	padding: 0.2rem 0;
+	line-height: normal;
+}
+.import ul li a textarea{
+	text-align: right;
+	border: 0;
+	outline: medium;
+	padding-top: 0.3rem;
+	resize: none;	
+	color: #666666;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 0.26rem;
+	color: #666666;
+	height: 100%;
+}
+
+.default_address{
+	background: #fff;
+	margin-top: 0.2rem;
+	line-height: 0.9rem;
+	padding: 0 0.24rem;
+	font-size: 0.26rem;
+	color: #333333;
+}
+.default_address p{
+	background: url('../images/pitch_off.png') right/0.4rem 0.4rem no-repeat;
+}
+
+
+.save{
+	width: 6.4rem;
+	background: #ea5b24;
+	color: #fff;
+	text-align: center;
+	line-height: 0.8rem;
+	font-size: 0.29rem;
+	border-radius: 3px;
+	margin-top: 0.7rem;
+}
+
+
+.address_detail{
+	position: fixed;
+	top: 0;
+	background: #f2f2f2;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	color: #333333;
+	font-size: 0.26rem;
+	line-height: 0.9rem;
+	display: none;
+}
+.address_detail ul{
+	background: #fff;
+	padding: 0 0.24rem;
+	margin-top: 0.2rem;
+}
+.address_detail ul li{
+	background: url('../images/icon_arrows.png') right/0.13rem 0.24rem no-repeat;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.succeed{
+	position: fixed;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	width: 3.4rem;
+	border-radius: 10px;
+	height: 2.8rem;
+	color: #fff;
+	font-size: 0.29rem;
+	text-align: center;
+	left: 50%;
+	margin-left: -1.7rem;
+	top: 50%;
+	margin-top: -1.4rem;
+	display: none;
+}
+
+.succeed span{
+	display: block;
+	width: 0.8rem;
+	height: 0.8rem;
+	margin-bottom: 0.4rem;
+	margin-top: 0.65rem;
+}
+.succeed p{
+    color: #fff;
+}

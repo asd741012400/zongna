@@ -1,0 +1,212 @@
+body{
+	background: #f2f2f2;
+}
+.consignee{
+	padding: 0.4rem 0.24rem;
+	background: #fff;
+	margin-top: 0.2rem;
+	background: url('../images/line_bg.png') left bottom/1.7rem 0.08rem repeat-x #fff;
+}
+.consignee h1{
+	color: #333333;
+	font-size: 0.28rem;
+	padding-bottom: 0.1rem;
+}
+.consignee h1 i{
+	padding-left: 0.3rem;
+}
+.consignee p{
+	color: #666666;
+	font-size: 0.26rem;
+	background: url('../images/icon_site_b.png') left 0.1rem/0.2rem 0.26rem no-repeat,url('../images/icon_arrows.png') right 0.1rem/0.1rem 0.18rem no-repeat;
+	padding: 0 0.38rem;
+}
+
+
+.details{
+	background: #fff;
+	margin-top: 0.2rem;
+	padding: 0rem 0.24rem 0;
+}
+.details ul li{
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 0.3rem;
+	padding-top: 0.3rem;
+}
+.details ul li b.details_img{
+	float: left;
+	overflow: hidden;
+	width: 1.88rem;
+	padding-right: 0.14rem;
+}
+.details ul li div{
+	float: left;
+	width: 5rem;
+}
+.details ul li div h2{
+	font-size: 0.26rem;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+.details ul li div span{
+	font-size: 0.26rem;
+	display: block;
+	color: #999999;
+
+}
+.details ul li div p{
+	overflow: hidden;
+}
+.details ul li div p b{
+	font-size: 0.32rem;
+	float: left;
+}
+.details ul li div p em{
+	font-size: 0.24rem;
+	color: #f23e3e;
+	float: left;
+	padding-left: 0.2rem;
+	line-height: 0.42rem;
+}
+.details ul li div p strong{
+	width: 0.7rem;
+	float: left;
+	margin-top: 0.08rem;
+}
+.details ul li div p i{
+	float: right;
+	font-size: 0.26rem;
+	color: #666666;
+}
+.details .dispatching{
+	overflow: hidden;
+	height: 0.8rem;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 0.8rem;
+}
+.details .dispatching span{
+	float: left;
+	color: #333333;
+	font-size: 0.26rem;
+}
+.details .dispatching a{
+	float: right;
+	color: #666666;
+	font-size: 0.26rem;
+}
+
+.vip_code{
+	background: #fff;
+	margin-top: 0.2rem;
+	overflow: hidden;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	padding: 0rem 0.24rem;
+	margin-bottom: 2rem;
+}
+.vip_code p{
+	overflow: hidden;
+	border-bottom: 1px solid #e5e5e5;
+}
+.vip_code p a{
+	font-size: 0.26rem;
+	color: #333333;
+	float: left;
+	background: url('../images/VIP_code.png') left/1.18rem 0.4rem no-repeat;
+	padding-left: 1.4rem;
+}
+.vip_code p span{
+	float: right;
+	display: block;
+	height: 0.9rem;
+	line-height: 0.9rem;
+	border: 0;
+	outline: medium;
+	font-size: 0.24rem;
+	width: 3.4rem;
+	color: #999999;
+	text-align: right;
+}
+
+
+
+.put_in{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	background: #fff;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+.put_in p{
+	flex: 1;
+	font-size: 0.26rem; 
+	text-align: right;
+	height: 0.98rem;
+	line-height: 0.98rem;
+	border-top: 1px solid #e5e5e5;
+	padding-right: 0.38rem;
+}
+.put_in p span{
+	font-size: 0.3rem;
+	color: #f03e3e;
+}
+.put_in a{
+	width: 2.6rem;
+	font-size: 0.3rem;
+	text-align: center;
+	height: 0.98rem;
+	line-height: 0.98rem;   
+	background: #ea5b24;
+	color: #fff;
+}
+
+
+.import{
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	display: none;
+}
+.import div{
+	background: #f2f2f2;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	overflow: hidden;
+}
+.import div p{
+	margin: 10px 0.24rem 0;
+	padding: 0.2rem;
+	background: #fff;
+	border-radius: 3px;
+	border: 1px solid #e5e5e5;
+	height: 0.4rem;
+}
+.import div p input{
+	width: 100%;
+	height: 100%;
+	border: 0;
+	float: left;
+	outline: medium;
+}
+.import div span{
+	float: right;
+	font-size: 0.26rem;
+	color: #333333;
+	width: 1.14rem;
+	border: 1px solid #e5e5e5;
+	line-height: 0.5rem;
+	background: #fff;
+	text-align: center;
+	border-radius: 5px;
+	margin: 0.2rem 0.24rem;
+}

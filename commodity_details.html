@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>聚交家创商城</title>
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+	<link rel="stylesheet" href="css/commodity_details.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+</head>
+
+<body>
+	
+<style>
+
+</style>
+
+<div class="banner">
+	<div class="swiper-container">
+	    <div class="swiper-wrapper">
+	       <!-- <div class="swiper-slide"><img src="images/commodity_banner.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="images/commodity_banner.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="images/commodity_banner.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="images/commodity_banner.jpg" alt=""></div>
+	        <div class="swiper-slide"><img src="images/commodity_banner.jpg" alt=""></div>-->
+	    </div>
+	    <div class="swiper-pagination"></div>
+	</div>
+</div>
+<div class="title">
+	<h1></h1>
+	<p>
+		<b>¥359.00</b>
+		<em>¥300.00</em>
+		<strong><img src="images/VIP_price.png" alt=""></strong>
+	</p>
+	<a><i>品牌</i><span>全有家私</span></a>
+</div>
+
+<div class="shop">
+	<p class="type">
+		<i>选择规格</i>
+		<span></span>
+	</p>
+<!--	<p class="site">
+		<i>送至</i>
+		<span></span>
+	</p>-->
+</div>
+
+
+<div class="specification_select">
+	<div class="div">
+		<article>
+			<b><img src="" alt=""></b>
+			<p>
+				<span>¥0</span>
+				<em>¥0</em>
+				<strong><img src="images/VIP_price.png" alt=""></strong>
+			</p>
+			<br clear="all">
+		</article>
+		<div class="specification">
+			<h3>规格</h3>
+			<ul>
+<!--				<li>1.5m床+床头柜*2+床垫</li>
+				<li>1.5m床+床头柜*2</li>
+				<li>1.5m单床</li>
+				<li>1.8m床+床头柜*2+床垫</li>
+				<li>1.5m床+床头柜*2+床垫</li>
+				<li>1.5m床+床头柜*2</li>
+				<li>1.5m单床</li>
+				<li>1.8m床+床头柜*2+床垫</li>-->
+			</ul>
+		</div>
+		<div class="count">
+			<b>数量</b>
+			<p>
+				<span>-</span>
+				<i>1</i>
+				<span>+</span>
+			</p>
+		</div>
+		<a>确定</a>
+		<span class="close"><img src="images/icon_close2.png" alt=""></span>
+	</div>
+</div>
+
+<div class="succeed">
+
+</div>
+
+<script>
+
+
+
+
+</script>
+
+<div class="site_select">
+	<div class="div">
+		<h2>配送至</h2>
+		<ul>
+<!--			<li class="active">重庆市北部新区全境重庆市北部新区栖霞路18号融创金贸时代19栋3-7</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>
+			<li>重庆南岸区城区重庆南岸区南坪街道响水路29号铁路小区（响水花园）一单元</li>-->
+		</ul>
+		<a>选择其他地址</a>
+		<span class="close"><img src="images/icon_close2.png" alt=""></span>
+	</div>
+</div>
+
+
+
+<div class="tab">
+	<div class="tab_change">
+		<p class="active" data-block='commodity_details'>
+			<a>商品详情</a>
+			<span></span>
+		</p>
+		<p data-block='user_comment'>
+			<a>用户评价</a>
+			<span></span>
+		</p>
+	</div>
+
+	<div class="commodity_details">
+	<!--	<p><img src="images/commodity_img1.png" alt=""></p>
+		<p><img src="images/commodity_img2.png" alt=""></p>
+		<p><img src="images/commodity_img3.png" alt=""></p>
+		<p><img src="images/commodity_img4.jpg" alt=""></p>-->
+	</div>
+
+	<div class="user_comment" style="display: none;">
+		<ul>
+		</ul>
+	</div>
+
+<div class="loading" style="display: none;">
+	<div>
+		<span><img src="images/loading.png"></span>
+		<p>加载中</p>
+	</div>
+</div>
+	<div class="purchase">
+		<ul>
+			<li style="position: relative;">
+				<span><img src="images/icon_headset.png" alt=""></span>
+				<p>客服</p>
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1124554616&site=qq&menu=yes"><img border="0" style="opacity: 0; position: absolute; top: 0; left: 0;" src="http://wpa.qq.com/pa?p=2:1124554616:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+			</li>
+			<li>
+				<span><img src="images/shoppingCart_h.png" alt=""></span>
+				<p>购物车</p>
+			</li>
+			<li class="shopping_trolley">
+				<a>加入购物车</a>
+			</li>
+			<li class="buy">
+				<b>立即购买</b>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<p class="bottom">到底了</p>
+<style>
+
+</style>
+
+
+<script src="js/public.js"></script>
+<script type="text/javascript">
+
+var ajaxUrl = grtAjaxUrl();
+var Request = new Object();
+Request = GetRequest();
+var goodsId = Request["goods_id"];
+// var uId = localStorage.getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// var uId = 1;
+var num,html,price,vipprice,thisGuigeId,addressId,oImg,elemtName;
+
+
+
+//商品详情
+goodsDetail()
+function goodsDetail(){
+	yDataAjax( ajaxUrl+"Home/Goods/goodsDetail" , "get" , {
+	    goods_id : goodsId,
+	} , function( data ) {
+
+	    if( data.status )
+	    {
+
+	        $('.title').attr("merchantId" , data.data.c_merchant_id)
+	        $('.title h1').html( data.data.c_title )
+	        $('.title a span').html( data.data.c_brand )
+			$('.commodity_details').html( data.data.c_detail  )
+	        $('.title p b').html( "¥"+data.data.c_price )
+	        $('.title p em').html( "¥"+data.data.c_vipprice )
+
+
+
+			if( data.data.images )
+			{
+			    $.each( data.data.images , function(index,val) {
+
+	                $('.swiper-wrapper').append(`<div class="swiper-slide"><img src="${val.c_image}" alt=""></div>`)
+
+	                var mySwiper = new Swiper ('.swiper-container', {
+	                    direction: 'horizontal',
+	                    pagination : '.swiper-pagination',
+	                    paginationType : 'fraction',
+	                    loop: true,
+	                    autoplay : 3000,
+	                })
+
+	            })
+			}
+		}
+	})
+}
+
+//用户评论
+
+let page = 1,
+	pageSize = 2;
+
+
+function goodsplList( pageSize , page ){
+	yDataAjax( ajaxUrl+"Home/Goods/goodsplList" , "get" , {
+	    goods_id : goodsId,
+	    pagesize : pageSize,
+	    p : page
+	} , function( data ) {
+
+	    if( data.status )
+	    {
+	    	if( data.data )
+	    	{
+	    		$.each( data.data , function( index , val ){
+
+	    			$('.user_comment ul').append(
+	    				`<li>
+							<span><img src="${val.user_photo}" alt=""></span>
+							<div>
+								<p>
+									<a>${val.c_username}</a>
+									<time>${val.c_create_time}</time>
+								</p>
+								<article>${val.c_content}</article>
+								<strong>
+									
+								</strong>
+							</div>
+						</li>`)
+
+	    			console.log(  val.c_goodspl_image )
+
+	    			$.each( val.c_goodspl_image , function( index2 , val2 ){
+
+		    			$('.user_comment ul li').eq($('.user_comment ul li').length-1).find("div").find("strong").append(`<b><img src="${val2.c_image}" alt=""></b>`)
+		    		})
+
+	    			
+	    		})
+
+	    		loadImg(  $('.user_comment ul li div strong b img') );
+	            if( page >= data.totalpage )
+	            {
+	                $(window).unbind("scroll");
+	                $('p.bottom').show()
+	            }
+
+
+	    		
+
+	    	}
+	    	else
+	    	{
+	    		loadImg( $('.user_comment ul') );
+	    		$('.user_comment ul').html(`<h1>${data.msg}</h1>`)
+	    		$('.tab').css("margin-bottom" , "2rem")
+	    	}
+		}
+	})
+
+}
+
+
+function scrollEv( page , pagesize ,htmlFn )
+{
+    $(window).unbind("scroll");
+    $(window).scroll(function(){
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if(scrollTop + windowHeight == scrollHeight)
+        {
+            page++;
+            addAjaxHtml( page , pagesize , htmlFn )
+        }
+    })
+}
+
+
+
+function addAjaxHtml(  page , pagesize , htmlFn )
+{
+    Request = GetRequest();
+    $('.loading').show()
+    $('p.bottom').hide()
+    setTimeout(function(){
+        htmlFn( page , pagesize );
+
+    },1000)
+}
+
+
+
+    //tab切换
+	$('.tab .tab_change p').click(function(){
+
+		$(this).addClass('active').siblings('p').removeClass('active');
+
+		if( $(this).attr('data-block') == "commodity_details" )
+		{
+			$(window).unbind("scroll");
+			$('.commodity_details').show().siblings('.user_comment').hide()
+		}
+		else if( $(this).attr('data-block') == "user_comment" )
+		{
+			
+			goodsplList( pageSize , page );
+			scrollEv( page , pageSize , goodsplList )
+			$('.user_comment').show().siblings('.commodity_details').hide()
+		}
+
+	})
+
+
+
+
+
+//地址选择
+/*	$('.shop .site').click(function(event) {
+        $('body').css({
+            height : "100%",
+            overflow: "hidden"
+        })
+
+
+        yDataAjax( ajaxUrl+"Home/Goods/address" , "get" , {
+            user_id : uId,
+        } , function( data ) {
+
+            if( data.status )
+            {
+                $('.site_select .div ul').html("")
+				console.log( data )
+				if( data.data )
+				{
+					$.each( data.data , function(index,val) {
+
+                    	$('.site_select .div ul').append(`<li address_id="${val.address_id}" c_isdefault="${val.c_isdefault}">${val.c_provinces}${val.c_city}${val.c_zone}${val.c_street}</li>`)
+
+                    })
+
+                    $('.site_select .div ul li[c_isdefault=1]').addClass("active")
+                    $('.site_select div ul li').click(function(event) {
+
+                        $('body').css({
+                            height : "auto",
+                            overflow: "auto"
+                        })
+                        $('.shop .site span').html( $(this).html() );
+                        $('.shop .site').attr( "address_id" , $(this).attr("address_id"))
+                        addressId = $(this).attr("address_id");
+                        toHide('.site_select')
+
+                    });
+
+
+                    $('.site_select div span.close').click(function(event) {
+
+                        $('body').css({
+                            height : "auto",
+                            overflow: "auto"
+                        })
+
+                        toHide('.site_select')
+
+                    });
+                    $('.site_select .div a').click(function(index,val) {
+                        window.location.href = "add_address.html?url=commodity_details"
+                    })
+
+                }
+
+
+			}
+		})
+
+		toShow('.site_select')
+
+	});
+
+//地址关闭
+    $('.specification_select div span.close').click(function(event) {
+        $('body').css({
+            height : "auto",
+            overflow: "auto"
+        })
+        toHide('.specification_select')
+
+    });*/
+
+
+
+
+//规格选择
+
+	$('.shop .type').click(function(event) {
+
+		guigeTan()
+
+	});
+
+
+function guigeTan()
+{
+    $('body').css({
+        height : "100%",
+        overflow: "hidden"
+    })
+    yDataAjax( ajaxUrl+"Home/Goods/guige" , "get" , {
+        goods_id : goodsId,
+    } , function( data ) {
+
+        if( data.status )
+        {
+            console.log( data )
+            $('.specification ul').html("")
+            if( data.data.guige )
+            {
+				$.each( data.data.guige , function(index,val) {
+
+					$('.specification ul').append(`<li guige_id="${val.guige_id}" c_price="${val.c_price}" c_vipprice="${val.c_vipprice}" c_stock="${val.c_stock}">${val.c_guige}</li>`)
+
+                })
+                // $('.specification ul li:eq(0)').addClass("active");
+                price = $('.specification ul li:eq(0)').attr('c_price');
+                vipprice = $('.specification ul li:eq(0)').attr('c_vipprice');
+                $('.specification_select .div article p span').html("¥"+price)
+                $('.specification_select .div article p em').html("¥"+vipprice)
+                $('.specification_select .div article b img').attr("src" , data.data.image)
+                oImg = data.data.image;
+
+                $('.specification ul li').click(function(event) {
+                    $('body').css({
+                        height : "auto",
+                        overflow: "auto"
+                    })
+                    price = $(this).attr('c_price');
+                    vipprice = $(this).attr('c_vipprice');
+                    $('.specification_select .div article p span').html("¥"+price)
+                    $('.specification_select .div article p em').html("¥"+vipprice)
+                    $(this).addClass('active').siblings('li').removeClass('active');
+                    html = $(this).html();
+                });
+            }
+
+
+            $('.count p i').html(1);
+            num = parseInt($('.count p i').html());
+            html = $('.specification ul li.active').html();
+
+
+		}
+	})
+
+	toShow('.specification_select');
+
+}
+
+//数量增减
+$('.count p span').click(function(event) {
+    event.stopPropagation();
+    if( $(this).index() == 0 )
+    {
+        num--;
+        if( num <= 1)num = 1
+    }
+    else if( $(this).index() == 2 )
+    {
+        num++;
+
+    }
+
+    $('.count p i').html( num )
+    // html[1] = "," + num;
+});
+
+
+//规格关闭
+$('.specification_select div a').click(function(event) {
+    $('body').css({
+        height : "auto",
+        overflow: "auto"
+    })
+
+    $.each( $('.specification ul li') , function(index,val) {
+
+        if( $(this).hasClass("active") ){
+            thisGuigeId = $(this).attr("guige_id")
+        }
+
+    })
+
+    console.log( html != undefined )
+    if( html != undefined )
+    {
+	    $('.shop .type span').html( html + "，" + num +"件" );
+	    $('.title p b').html( "¥"+price )
+	    $('.title p em').html( "¥"+vipprice )
+	    $('.shop .type').attr( "c_guige_id" )
+	    toHide('.specification_select')
+
+
+	    if( elemtName == "shopping_trolley" )
+	    {
+		    yDataAjax( ajaxUrl+"Home/Order/addcart" , "post" , {
+		        c_user_id : user_Id,
+		        c_goods_id : goodsId,
+		        c_guige_id : thisGuigeId,
+		        c_num : num,
+		        c_address_id : addressId,
+		        c_merchant_id : $('.title').attr("merchantId")
+		    } , function( data ) {
+
+		        if( data.status )
+		        {
+		            $('.succeed').html(
+		                `<span><img src="images/icon_succeed.png" alt=""></span>
+								<p>添加购物车成功</p>`)
+		            thisGuigeId = null;
+		            succeedShow()
+		            // $('.shop .type span').html( "" );
+		        }
+
+		    })
+
+	    }
+	    else if( elemtName == "buy" )
+	    {
+	    	let oCommodityData = [];
+			let num = parseInt(($(".type span").html()).split("，")[1]) ;
+		    let	guige = $(".type span").html().split("，")[0];
+		    let	price = $(".title p b").html().substr(1);
+		    let	vipprice =$(".title p em").html().substr(1);
+
+		    oCommodityData[0] = {};
+		    oCommodityData[0].goodsId = goodsId;
+		    oCommodityData[0].merchantId = $(".title").attr("merchantid");
+		    oCommodityData[0].guigeId = thisGuigeId;
+		    oCommodityData[0].num =  num;
+		    oCommodityData[0].price = price;
+		    oCommodityData[0].vipprice = vipprice;
+		    oCommodityData[0].guige = guige;
+		    oCommodityData[0].image = oImg;
+		    oCommodityData[0].title = $('.title h1').html();
+
+	    	var sCommodityData = "";
+			$.each( oCommodityData , function(index,val) {
+
+				sCommodityData += JSON.stringify(val)+"^";
+			})
+
+			console.log( sCommodityData )
+			localStorage.setItem( "sCommodityData" , sCommodityData )
+
+			window.location.href = "confirm_an_order.html";
+	    }
+
+
+    }
+    else
+    {
+
+    	$('.succeed').html(
+            `<span><img src="images/icon_warning.png" alt=""></span>
+					<p>请选择规格</p>`)
+    	succeedShow()
+
+    }
+
+
+
+
+});
+
+$('.specification_select div .close').click(function(event) {
+    $('body').css({
+        height : "auto",
+        overflow: "auto"
+    })
+    $('.shop .type span').html( "" );
+    toHide('.specification_select')
+    
+})
+
+$('.purchase ul li.shopping_trolley').click(function(event) {
+
+	guigeTan()
+	elemtName = "shopping_trolley";
+
+});
+
+
+$('.purchase ul li.buy').click(function(event) {
+
+        guigeTan()
+		elemtName = "buy"
+/*
+    if( guige != "" )
+    {
+
+
+		
+    }
+    else
+	{
+
+	}*/
+});
+
+
+$('.purchase ul li:eq(1)').click(function() {
+	window.location.href = "shopping_cart.html";
+})
+
+
+
+
+
+function toShow( calss ){
+	$(calss).show()
+}
+
+function toHide( calss ){
+
+	$(calss).hide();
+}
+
+
+function succeedShow(){
+	$('.succeed').show();
+	setTimeout(function(){
+		$('.succeed').hide();
+
+	},1000)
+}
+
+</script>
+
+
+</body>
+</html>
+
+
+

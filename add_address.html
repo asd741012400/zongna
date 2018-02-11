@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta id="meta" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1 maximum-scale=2, user-scalable=no">
+	<title>新增收货地址</title>
+	<link rel="stylesheet" href="css/mui.min.css">
+	<link rel="stylesheet" href="css/mui.picker.css">
+	<link rel="stylesheet" href="css/mui.poppicker.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/add_address.css">
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+
+<body>
+
+<div class="import">
+	<ul>
+		<li>
+			<span>收货人</span>
+			<a><input type="text" placeholder="请输入收货人" class="name"></a>
+		</li>
+		<li>
+			<span>联系电话</span>
+			<a><input type="text"  placeholder="请输入联系电话" class="tel"></a>
+		</li>
+		<li class="arrows" data-address="region">
+			<span>所在地区</span>
+			<a>
+				<div class="mui-content">
+					<div class="mui-content-padded">
+						<p id='showCityPicker3' class="mui-btn mui-btn-block">请选择</p>
+					</div>
+				</div>
+				<!--<input id="demo1" type="text" readonly="" name="input_area" placeholder="请选择" class="ccc"/>-->
+			</a>
+		</li>
+		<li>
+			<span>详细地址</span>
+			<a><textarea rows="3" name="" placeholder="请输入详细地址" class="street"></textarea></a>
+		</li>
+	</ul>
+</div>
+
+
+
+
+<div class="default_address" data-flag="0"><p>设为默认地址</p></div>
+
+<div class="save">保 存</div>
+
+<div class="succeed">
+
+</div>
+
+
+<style>
+
+
+</style>
+
+<script src="./js/mui.min.js"></script>
+<!--<script src="../js/mui.picker.min.js"></script>-->
+<script src="./js/mui.picker.js"></script>
+<script src="./js/mui.poppicker.js"></script>
+<script src="./js/city.data.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/public.js"></script>
+<script type="text/javascript">
+    (function($, doc) {
+        $.init();
+        $.ready(function() {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * @param {Object} obj 对象
+             * @param {String} param 属性名
+             */
+            var _getParam = function(obj, param) {
+                return obj[param] || '';
+            };
+
+            //级联示例
+            var cityPicker3 = new $.PopPicker({
+                layer: 3
+            });
+            cityPicker3.setData(cityData3);
+            var showCityPickerButton = doc.getElementById('showCityPicker3');
+            showCityPickerButton.addEventListener('tap', function(event) {
+                cityPicker3.show(function(items) {
+                    showCityPickerButton.innerText =  _getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text');
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+        });
+    })(mui, document);
+
+
+let flag = 1;
+$('.default_address').click(function(event) {
+	if( flag )
+	{
+		$('.default_address p').css("background","url('images/pitch_on.png') right/0.4rem 0.4rem no-repeat");
+		$('.default_address').attr("data-flag" , 1)
+		flag = 0;
+	}
+	else
+	{
+		$('.default_address p').css("background","url('images/pitch_off.png') right/0.4rem 0.4rem no-repeat");
+		$('.default_address').attr("data-flag" , 0)
+		flag = 1;
+	}
+
+});
+
+
+var ajaxUrl = grtAjaxUrl();
+// var uId = localStorage.getItem("uId");
+var user_Id = localStorage.getItem("userId");
+// var uId = 1;
+var Request = new Object();
+Request = GetRequest();
+var addressId = Request["address_id"];
+var url = Request["url"];
+
+if( addressId )
+{
+    yDataAjax( ajaxUrl+"Home/User/addressEdit" , "get" , {
+        address_id : addressId,
+        user_id : user_Id
+    } , function( data ) {
+
+		if( data.status )
+		{
+            $('.name').val( data.data.c_name )
+            $('.tel').val( data.data.c_tel )
+            $('#showCityPicker3').html( data.data.c_provinces +" "+ data.data.c_city +" "+ data.data.c_zone )
+            $('.street').val( data.data.c_street )
+			if( data.data.c_isdefault == "1" )
+			{
+                $('.default_address p').css("background","url('images/pitch_on.png') right/0.4rem 0.4rem no-repeat");
+                $('.default_address').attr("data-flag" , 1)
+                flag = 0;
+			}
+            else
+            {
+                $('.default_address p').css("background","url('images/pitch_off.png') right/0.4rem 0.4rem no-repeat");
+                $('.default_address').attr("data-flag" , 0)
+                flag = 1;
+            }
+		}
+
+    })
+    addAddress( ajaxUrl+"Home/User/addressSave" )
+}
+else
+{
+    addAddress( ajaxUrl+"Home/User/addressAdd" )
+}
+function succeedShow(){
+	$('.succeed').show();
+	setTimeout(function(){
+		$('.succeed').hide();
+
+	},1000)
+}
+
+
+function addAddress( addressUrl ) {
+
+    $('.save').click(function() {
+        let name = $('.name').val(),
+            tel = $('.tel').val(),
+            address = $("#showCityPicker3").html(),
+            street =  $(".street").val(),
+            isdefault =$('.default_address').attr("data-flag");
+        address = address.split(" ")
+        let provinces = address[0],
+            city = address[1],
+            zone = address[2];
+
+
+        yDataAjax( addressUrl , "post" , {
+            address_id : addressId,
+            c_user_id : user_Id,
+            c_name : name,
+            c_tel : tel,
+            c_provinces : provinces,
+            c_city : city,
+            c_zone : zone,
+            c_street : street,
+            c_isdefault : isdefault,
+        } , function( data ) {
+
+            if( data.status )
+            {
+                $('.succeed').html(
+                    `<span><img src="images/icon_achieve.png"></span>
+					<p>${data.msg}</p>`);
+                succeedShow()
+                setTimeout(function() {
+                    if( url == "my_integral" )
+                    {
+                        window.location.href = "my_integral.html"
+					}
+					else if( url == "commodity_details" )
+					{
+                        window.location.href = "commodity_details.html"
+					}
+                    else
+				    {
+                       window.location.href = "address.html"
+				    }
+                },500)
+            }
+            else
+            {
+                $('.succeed').html(
+                    `<span><img src="images/icon_warning.png"></span>
+					<p>${data.msg}</p>`);
+                succeedShow()
+            }
+
+        })
+
+    })
+
+}
+
+</script>
+
+
+</body>
+</html>
+
+
